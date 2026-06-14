@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Give — Catholic Church of the Lord's Baptism</title>
-<meta name="description" content="Support the mission of the Catholic Church of the Lord's Baptism. Give securely by bank transfer to the Harvest, Thanksgiving, Building and Tithes funds." />
+<meta name="description" content="Support the mission of the Catholic Church of the Lord's Baptism. Give securely by bank transfer." />
 <meta name="theme-color" content="#102A43" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -55,15 +55,8 @@
   .hero p.lede{ color:rgba(255,255,255,.92); font-size:1.2rem; max-width:30rem; margin-inline:auto; }
   .hero .cta-row{ display:flex; flex-direction:column; gap:var(--s2); align-items:center; margin-top:var(--s4); }
   .hero .trust{ margin-top:var(--s4); color:rgba(255,255,255,.78); font-size:.95rem; }
-  .ripple{ position:relative; width:96px; height:96px; margin:0 auto var(--s4); }
-  .ripple svg{ position:absolute; inset:0; }
-  .ripple .ring{ fill:none; stroke:var(--gold); stroke-width:1.5; opacity:0; transform-origin:center; }
-  .ripple .drop{ fill:var(--gold); }
-  @keyframes ripple-out{ 0%{ transform:scale(.2); opacity:0; } 20%{ opacity:.85; } 100%{ transform:scale(1); opacity:0; } }
-  .ripple .r1{ animation:ripple-out 3.6s ease-out infinite; }
-  .ripple .r2{ animation:ripple-out 3.6s ease-out 1.2s infinite; }
-  .ripple .r3{ animation:ripple-out 3.6s ease-out 2.4s infinite; }
   .hero .edge{ position:absolute; left:0; right:0; bottom:-1px; width:100%; display:block; }
+  .hero-logo { width: 140px; height: auto; margin: 0 auto var(--s4); display: block; border-radius: 50%; box-shadow: var(--shadow-lift); }
   .steps{ display:grid; gap:var(--s4); margin-top:var(--s4); }
   .step{ display:flex; gap:var(--s3); align-items:flex-start; }
   .step .num{ flex:none; width:44px; height:44px; border-radius:var(--r-pill); display:grid; place-items:center; font-family:"Spectral",serif; font-weight:600; font-size:1.25rem; background:var(--brand-900); color:var(--gold); }
@@ -117,8 +110,10 @@
   .hub-link .ic{ flex:none; width:40px; height:40px; border-radius:var(--r-pill); display:grid; place-items:center; background:var(--gold-soft); color:var(--brand-900); }
   #toast{ position:fixed; left:50%; bottom:var(--s4); transform:translateX(-50%) translateY(2rem); background:var(--brand-900); color:#fff; padding:.8rem 1.4rem; border-radius:var(--r-pill); box-shadow:var(--shadow-lift); opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; z-index:60; font-weight:600; }
   #toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+  
+  select.field-input { appearance: auto; -webkit-appearance: auto; cursor: pointer; }
+  
   @media (min-width:560px){ .hero .cta-row{ flex-direction:row; justify-content:center; } }
-  @media (prefers-reduced-motion:reduce){ *{ animation:none!important; transition:none!important; scroll-behavior:auto!important; } .ripple .ring{ opacity:.5; } }
 </style>
 </head>
 <body>
@@ -127,49 +122,43 @@
 <header class="topbar">
   <div class="wrap">
     <a class="brand-mark" href="#top" aria-label="Catholic Church of the Lord's Baptism — home">
-      <svg class="mark" viewBox="0 0 48 48" aria-hidden="true">
-        <circle cx="24" cy="24" r="22" fill="none" stroke="#C9A24B" stroke-width="1.5" opacity=".5"/>
-        <circle cx="24" cy="24" r="14" fill="none" stroke="#C9A24B" stroke-width="1.5" opacity=".8"/>
-        <circle cx="24" cy="24" r="4.5" fill="#C9A24B"/>
-      </svg>
+      <img src="image_1ba004.png" alt="Logo" class="mark" style="border-radius:50%;">
       <span class="name" id="brand-name">The Lord's Baptism</span>
     </a>
     <a class="btn btn-ghost" href="#give">Give</a>
   </div>
 </header>
+
 <section class="hero" id="top">
   <div class="wrap">
-    <div class="ripple" aria-hidden="true">
-      <svg viewBox="0 0 96 96">
-        <circle class="ring r3" cx="48" cy="48" r="44"/>
-        <circle class="ring r2" cx="48" cy="48" r="44"/>
-        <circle class="ring r1" cx="48" cy="48" r="44"/>
-        <circle class="drop" cx="48" cy="48" r="6"/>
-      </svg>
-    </div>
+    <img src="image_1ba004.png" alt="Catholic Church of the Lord's Baptism Logo" class="hero-logo">
+    
     <span class="eyebrow">Catholic Church of the Lord's Baptism</span>
     <h1 id="hero-title">Your generosity ripples outward</h1>
     <p class="lede" id="hero-lede">Every gift sustains the worship, works of mercy, and growth of our parish family. Thank you for giving.</p>
+    
     <div class="cta-row">
       <a class="btn btn-gold" href="#give">See ways to give</a>
       <a class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,.5)" href="#contact">Contact the parish</a>
     </div>
-    <p class="trust" id="hero-trust">Secure bank transfers · Managed by the Parish Finance Committee</p>
+    <p class="trust" id="hero-trust"></p>
   </div>
   <svg class="edge" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
     <path d="M0,40 C240,10 480,55 720,38 C960,22 1200,52 1440,30 L1440,60 L0,60 Z" fill="#FBFCFE"/>
   </svg>
 </section>
+
 <section class="section" aria-labelledby="how-title">
   <div class="wrap">
     <div class="section-head"><h2 id="how-title">Giving takes one minute</h2></div>
     <ol class="steps" style="list-style:none;padding:0;margin:0;">
-      <li class="step"><span class="num">1</span><div><h3>Choose a fund</h3><p>Pick what your gift is for — harvest, thanksgiving, the building, or your regular offering.</p></div></li>
+      <li class="step"><span class="num">1</span><div><h3>Choose a fund</h3><p>Pick what your gift is for — tithe, project donation, or harvest.</p></div></li>
       <li class="step"><span class="num">2</span><div><h3>Copy the account number</h3><p>One tap copies the parish account number so there are no typing mistakes.</p></div></li>
       <li class="step"><span class="num">3</span><div><h3>Transfer in your bank app</h3><p>Paste it into your bank app or USSD, send your gift, and you're done.</p></div></li>
     </ol>
   </div>
 </section>
+
 <section class="section section--band" id="give" aria-labelledby="give-title">
   <div class="wrap">
     <div class="section-head">
@@ -180,10 +169,58 @@
       <h2 id="give-title">Choose a fund to give to</h2>
       <p>Select a fund to see the parish bank details.</p>
     </div>
+    
     <div class="chips" id="fund-chips" role="group" aria-label="Donation funds"></div>
     <div id="fund-detail" aria-live="polite"></div>
+
+    <div class="section-head" style="margin-top: 4rem; margin-bottom: 2rem;">
+      <h3>Other Societies & Organisations</h3>
+      <p>Select a society to view their account details.</p>
+    </div>
+    
+    <div class="card" style="margin: 0 auto;">
+      <label for="society-select" style="display:block; font-weight:600; margin-bottom:.5rem;">Select a Society:</label>
+      <select id="society-select" class="field-input" style="width:100%; padding:.8rem; margin-bottom: 0; border:2px solid var(--line); border-radius:var(--r); font:inherit;">
+        <option value="" disabled selected>-- Choose a Society --</option>
+        <option value="1312535088">Catholic Men Organization</option>
+        <option value="1312524871">Catholic Women Organization</option>
+        <option value="1312524857">Catholic Youth Organization of Nigeria</option>
+        <option value="1229456010">Missionary Childhood Association</option>
+        <option value="1312524826">St. Vincent De Paul</option>
+        <option value="1229456742">Confraternity of Christian Mothers</option>
+        <option value="1229456979">Guild of Faith Formators</option>
+        <option value="1229457505">Ministry of Lectors</option>
+        <option value="1229457653">Ministry of Choir</option>
+        <option value="1229457732">Ministry of Altar Servers</option>
+        <option value="1229456780">Parish Laity Council</option>
+        <option value="1229456917">Parish Pastoral Council</option>
+      </select>
+
+      <div id="society-account-detail" style="display:none; padding-top: 1.5rem; margin-top: 1.5rem; border-top: 1px solid var(--line);">
+         <div class="field">
+            <div class="label">Account name</div>
+            <div class="value">CCLB - <span id="soc-name"></span></div>
+         </div>
+         <div class="field">
+            <div class="label">Bank</div>
+            <div class="value">Zenith Bank</div>
+         </div>
+         <div class="field">
+            <div class="label">Account number</div>
+            <div class="acct-number" id="soc-acc"></div>
+            <div class="copy-row">
+              <button class="btn-copy" id="soc-copy-btn" type="button">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy account number
+              </button>
+            </div>
+         </div>
+      </div>
+    </div>
+
   </div>
 </section>
+
 <section class="section" id="confirm" aria-labelledby="confirm-title">
   <div class="wrap">
     <div class="section-head">
@@ -193,12 +230,19 @@
     <div class="card confirm-card">
       <label for="cf-name">Your name</label>
       <input class="field-input" id="cf-name" type="text" autocomplete="name" placeholder="e.g. Mary Okafor" />
+      
       <label for="cf-fund">Which fund</label>
       <select class="field-input" id="cf-fund"></select>
+      
       <label for="cf-amount">Amount (optional)</label>
       <input class="field-input" id="cf-amount" type="text" inputmode="numeric" placeholder="e.g. 10,000" />
+      
       <label for="cf-ref">Transfer reference / teller (optional)</label>
       <input class="field-input" id="cf-ref" type="text" placeholder="e.g. TRX-48213" />
+      
+      <label for="cf-receipt">Upload Receipt / Image (optional)</label>
+      <input class="field-input" id="cf-receipt" type="file" accept="image/*, .pdf" style="padding: .6rem 1rem;" />
+
       <button class="btn btn-wa" id="cf-send" type="button">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.06 24l1.68-6.13A11.86 11.86 0 0 1 .14 11.9C.14 5.33 5.5 0 12.08 0a11.82 11.82 0 0 1 8.42 3.49 11.78 11.78 0 0 1 3.48 8.42c0 6.57-5.36 11.9-11.94 11.9a12 12 0 0 1-5.71-1.45L.06 24z"/></svg>
         Send confirmation on WhatsApp
@@ -207,73 +251,70 @@
     </div>
   </div>
 </section>
+
 <section class="section section--band" id="hub" aria-labelledby="hub-title" hidden>
   <div class="wrap">
     <div class="section-head"><h2 id="hub-title">Stay connected</h2><p>Worship with us, follow along, and join parish life.</p></div>
     <div class="hub-grid" id="hub-grid"></div>
   </div>
 </section>
+
 <section class="section" id="contact" aria-labelledby="contact-title">
   <div class="wrap">
     <div class="section-head"><h2 id="contact-title">Visit or reach us</h2></div>
     <div class="contact-grid" id="contact-grid"></div>
   </div>
 </section>
+
 <footer class="site-footer">
   <div class="wrap">
-    <svg class="mark" viewBox="0 0 48 48" aria-hidden="true">
-      <circle cx="24" cy="24" r="22" fill="none" stroke="#C9A24B" stroke-width="1.5" opacity=".4"/>
-      <circle cx="24" cy="24" r="14" fill="none" stroke="#C9A24B" stroke-width="1.5" opacity=".7"/>
-      <circle cx="24" cy="24" r="4.5" fill="#C9A24B"/>
-    </svg>
+    <img src="image_1ba004.png" alt="Logo" class="mark" style="border-radius:50%; opacity:.8;">
     <h3 id="footer-name">Catholic Church of the Lord's Baptism</h3>
-    <p id="footer-tag">A parish family in worship and service.</p>
+    <p id="footer-tag"></p>
     <p id="footer-contact"></p>
     <p class="fine" id="footer-fine"></p>
   </div>
-</footer><script>
+</footer>
+
+<script>
   const CONFIG = {
     churchName:   "Catholic Church of the Lord's Baptism",
     shortName:    "The Lord's Baptism",
     heroTitle:    "Your generosity ripples outward",
     heroLede:     "Every gift sustains the worship, works of mercy, and growth of our parish family. Thank you for giving.",
-    trustLine:    "Secure bank transfers · Managed by the Parish Finance Committee",
-    footerTag:    "A parish family in worship and service.",
-    whatsappNumber: "2348000000000",
+    trustLine:    "We are baptised by his spirit",
+    footerTag:    "We are baptised by his spirit",
+    whatsappNumber: "2349132222286",
     funds: [
-      { id:"harvest", name:"Annual Harvest", tag:"This season", active:true,
+      { id:"offertory", name:"Offeratory, Mass Booking, Tithe", tag:"", active:true,
+        blurb:"Your regular tithe, offertory, and mass booking.",
+        accounts:[{ accountName:"Catholic Church of the Lord's Baptism", bankName:"Globus Bank", accountNumber:"1000008403" }] },
+      { id:"projects", name:"Donation Projects", tag:"", active:false,
+        blurb:"Support our ongoing parish donation projects.",
+        accounts:[{ accountName:"Catholic Church of the Lord's Baptism", bankName:"Zenith Bank", accountNumber:"1015067231" }] },
+      { id:"harvest", name:"Annual Harvest", tag:"This season", active:false,
         blurb:"Our yearly harvest thanksgiving — supporting the parish for the year ahead.",
-        accounts:[{ accountName:"Catholic Church of the Lord's Baptism", bankName:"Guaranty Trust Bank (GTBank)", accountNumber:"0123456789" }] },
-      { id:"thanksgiving", name:"Thanksgiving Offering", tag:"", active:false,
-        blurb:"Give thanks to God for answered prayers and personal blessings.",
-        accounts:[{ accountName:"Catholic Church of the Lord's Baptism", bankName:"Zenith Bank", accountNumber:"1010101010" }] },
-      { id:"building", name:"Building Fund", tag:"", active:false,
-        blurb:"Help us build and maintain a worthy home for worship in our community.",
-        accounts:[{ accountName:"CCLB Building Project", bankName:"Access Bank", accountNumber:"0987654321" }] },
-      { id:"tithes", name:"Tithes & Offering", tag:"", active:false,
-        blurb:"Your regular tithe and weekly offering, given faithfully.",
-        accounts:[{ accountName:"Catholic Church of the Lord's Baptism", bankName:"First Bank of Nigeria", accountNumber:"3033445566" }] }
+        accounts:[{ accountName:"Catholic Church of the Lord's Baptism", bankName:"Zenith Bank", accountNumber:"1312487204" }] }
     ],
     contact: {
-      address: "1 Parish Way, Your Town, Lagos State",
-      mapUrl:  "https://maps.google.com/?q=Catholic+Church+of+the+Lord's+Baptism",
-      phone:   "+234 800 000 0000",
-      email:   "office@thelordsbaptism.org",
-      massTimes: "Sunday Mass: 7:00 am · 9:00 am · 11:00 am"
+      address: "Osapa London off Beach Resort Lekki, Lagos",
+      mapUrl:  "https://maps.google.com/?q=Osapa+London+off+Beach+Resort+Lekki,+Lagos",
+      phone:   "+234 913 222 2286",
+      email:   "info@cclblekki.com",
+      massTimes: "Sunday: Prep 8:00 AM, Mass 8:30 AM · Weekdays (M/W/F): 6:30 AM · Sat & Holidays: 8:00 AM · Confession: Sat 8:45 AM",
+      officeHours: "Tuesday, Wednesday and Friday: 9:00 AM - 2:00 PM"
     },
     showHub: false,
-    hubLinks: [
-      { label:"Watch the Livestream", url:"https://youtube.com/@yourparish", icon:"play" },
-      { label:"Follow on Facebook",   url:"https://facebook.com/yourparish", icon:"fb" },
-      { label:"Upcoming Events",      url:"#",                               icon:"cal" }
-    ]
+    hubLinks: []
   };
+
   (function () {
     const $ = (s, r = document) => r.querySelector(s);
     const el = (tag, props = {}, html) => { const n = document.createElement(tag); Object.assign(n, props); if (html != null) n.innerHTML = html; return n; };
-    const esc = (s) => String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
+    const esc = (s) => String(s).replace(/[&<>"]/g, c => ({ "&":"&","<":"<",">":">",'"':"&quot;" }[c]));
     const groupDigits = (s) => String(s).replace(/\D/g, "").replace(/(\d{3,4})(?=\d)/g, "$1 ");
     const waLink = (num, msg) => "https://wa.me/" + String(num).replace(/\D/g, "") + "?text=" + encodeURIComponent(msg);
+    
     $("#brand-name").textContent  = CONFIG.shortName;
     $("#hero-title").textContent  = CONFIG.heroTitle;
     $("#hero-lede").textContent   = CONFIG.heroLede;
@@ -281,6 +322,7 @@
     $("#footer-name").textContent = CONFIG.churchName;
     $("#footer-tag").textContent  = CONFIG.footerTag;
     document.title = "Give — " + CONFIG.churchName;
+
     function copy(text, btn) {
       const done = () => {
         const original = btn.dataset.original || btn.innerHTML;
@@ -294,6 +336,7 @@
         navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
       } else { fallbackCopy(text, done); }
     }
+
     function fallbackCopy(text, done) {
       const t = el("textarea"); t.value = text;
       t.style.position = "fixed"; t.style.opacity = "0"; document.body.appendChild(t);
@@ -301,27 +344,32 @@
       try { document.execCommand("copy"); done(); } catch (e) { toast("Press and hold to copy"); }
       document.body.removeChild(t);
     }
+
     let toastTimer;
     function toast(msg) {
       const t = $("#toast"); t.textContent = msg; t.classList.add("show");
       clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 2000);
     }
+
     const chipsWrap = $("#fund-chips");
     const detailWrap = $("#fund-detail");
     let activeId = (CONFIG.funds.find(f => f.active) || CONFIG.funds[0]).id;
+    
     CONFIG.funds.forEach(fund => {
       const chip = el("button", { className: "chip", type: "button" });
       chip.setAttribute("aria-pressed", String(fund.id === activeId));
-      chip.innerHTML = `<span class="dot" aria-hidden="true">&bull;</span>` + esc(fund.name) +
+      chip.innerHTML = `<span class="dot" aria-hidden="true">•</span>` + esc(fund.name) +
         (fund.tag ? ` <span class="chip-tag">` + esc(fund.tag) + `</span>` : "");
       chip.addEventListener("click", () => selectFund(fund.id));
       chipsWrap.appendChild(chip);
     });
+
     function selectFund(id) {
       activeId = id;
       [...chipsWrap.children].forEach((c, i) => c.setAttribute("aria-pressed", String(CONFIG.funds[i].id === id)));
       renderFund(CONFIG.funds.find(f => f.id === id));
     }
+
     function renderFund(fund) {
       const accountsHtml = fund.accounts.map(acc => `
         <div class="account">
@@ -347,7 +395,8 @@
             </div>
           </div>
         </div>`).join("");
-      const waMsg = `Hello ${CONFIG.shortName}, I have given to the ${fund.name} fund. Please confirm receipt. God bless.`;
+        
+      const waMsg = `Hello ${CONFIG.shortName}, I have given to the ${fund.name}. Please confirm receipt. God bless.`;
       detailWrap.innerHTML = `
         <div class="card">
           <h3 class="fund-name">${esc(fund.name)}</h3>
@@ -355,7 +404,7 @@
           ${accountsHtml}
           <div class="verify-note">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1C4E78" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-            <span>Before sending, check the account name reads <strong>${esc(fund.accounts[0].accountName)}</strong>. The parish never collects gifts through personal accounts.</span>
+            <span>Before sending, check the account name reads <strong>${esc(fund.accounts[0].accountName)}</strong>.</span>
           </div>
           <a class="btn btn-wa" style="margin-top:1.25rem" href="${waLink(CONFIG.whatsappNumber, waMsg)}" target="_blank" rel="noopener">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.06 24l1.68-6.13A11.86 11.86 0 0 1 .14 11.9C.14 5.33 5.5 0 12.08 0a11.82 11.82 0 0 1 8.42 3.49 11.78 11.78 0 0 1 3.48 8.42c0 6.57-5.36 11.9-11.94 11.9a12 12 0 0 1-5.71-1.45L.06 24z"/></svg>
@@ -365,8 +414,29 @@
       detailWrap.querySelectorAll(".btn-copy").forEach(b =>
         b.addEventListener("click", () => copy(b.dataset.copy, b)));
     }
+
+    // Societies Dropdown Logic
+    const socSelect = $("#society-select");
+    const socDetail = $("#society-account-detail");
+    const socCopyBtn = $("#soc-copy-btn");
+    let currentSocNumber = "";
+
+    socSelect.addEventListener("change", function() {
+      if(this.value) {
+        currentSocNumber = this.value;
+        $("#soc-acc").textContent = groupDigits(this.value);
+        $("#soc-name").textContent = this.options[this.selectedIndex].text;
+        socDetail.style.display = "block";
+      } else {
+        socDetail.style.display = "none";
+      }
+    });
+
+    socCopyBtn.addEventListener("click", () => copy(currentSocNumber, socCopyBtn));
+
     const cfFund = $("#cf-fund");
     CONFIG.funds.forEach(f => cfFund.appendChild(el("option", { value: f.name, textContent: f.name })));
+    
     $("#cf-send").addEventListener("click", () => {
       const name = $("#cf-name").value.trim();
       const fund = cfFund.value;
@@ -380,25 +450,31 @@
       msg += `\nPlease confirm receipt. God bless.`;
       window.open(waLink(CONFIG.whatsappNumber, msg), "_blank", "noopener");
     });
+
     const c = CONFIG.contact;
     const icon = (p) => `<span class="ic" aria-hidden="true">${p}</span>`;
     const contactItems = [
       c.address && { label: "Address", value: `<a href="${esc(c.mapUrl)}" target="_blank" rel="noopener">${esc(c.address)}</a>`,
         ic: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>' },
-      c.massTimes && { label: "Mass times", value: `<span>${esc(c.massTimes)}</span>`,
+      c.massTimes && { label: "Mass & Confession Times", value: `<span>${esc(c.massTimes)}</span>`,
         ic: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>' },
+      c.officeHours && { label: "Priest's Office Hours", value: `<span>${esc(c.officeHours)}</span>`,
+        ic: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>' },
       c.phone && { label: "Phone", value: `<a href="tel:${esc(c.phone.replace(/[^\d+]/g,''))}">${esc(c.phone)}</a>`,
         ic: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.4-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>' },
       c.email && { label: "Email", value: `<a href="mailto:${esc(c.email)}">${esc(c.email)}</a>`,
         ic: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>' }
     ].filter(Boolean);
+
     const cg = $("#contact-grid");
     contactItems.forEach(it => {
       cg.appendChild(el("div", { className: "contact-item" },
         `${icon(it.ic)}<div><div class="ct-label">${esc(it.label)}</div>${it.value}</div>`));
     });
+
     $("#footer-contact").innerHTML = [c.phone && esc(c.phone), c.email && esc(c.email)].filter(Boolean).join(" · ");
-    $("#footer-fine").textContent = "© " + new Date().getFullYear() + " " + CONFIG.churchName + ". Built and maintained by the Parish Media & Finance Committee.";
+    $("#footer-fine").textContent = "© " + new Date().getFullYear() + " " + CONFIG.churchName + ". Built and maintained by the CCLB Parish.";
+    
     if (CONFIG.showHub && CONFIG.hubLinks.length) {
       const hub = $("#hub"); hub.hidden = false;
       const grid = $("#hub-grid");
