@@ -89,7 +89,7 @@
      TOP BAR
      ========================================================= */
   .topbar{ position:sticky; top:0; z-index:30; background:rgba(251,252,254,.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
-  .topbar .wrap{ display:flex; align-items:center; justify-content:space-between; padding-block:.6rem; } .nav-actions{ display:flex; align-items:center; gap:.5rem; flex-wrap:wrap; justify-content:flex-end; }
+  .topbar .wrap{ display:flex; align-items:center; justify-content:space-between; padding-block:.6rem; }
   .brand-mark{ display:flex; align-items:center; gap:.6rem; text-decoration:none; color:var(--ink); }
   .brand-mark .crest{ width:40px; height:40px; }
   .brand-mark .name{ font-family:"Spectral",serif; font-weight:600; font-size:1.05rem; line-height:1.1; }
@@ -221,10 +221,7 @@
       <span class="crest" role="img" aria-label="Church crest"></span>
       <span class="name" id="brand-name">The Lord's Baptism</span>
     </a>
-    <div class="nav-actions">
-      <a class="btn btn-ghost" href="https://join.cclbparish.com">Join Our Parish</a>
-      <a class="btn btn-ghost" href="#give">Give</a>
-    </div>
+    <a class="btn btn-ghost" href="#give">Give</a>
   </div>
 </header>
 
@@ -237,6 +234,7 @@
     <p class="lede" id="hero-lede">Every gift sustains the worship, works of mercy, and growth of our parish family. Thank you for giving.</p>
     <div class="cta-row">
       <a class="btn btn-gold" href="#give">See ways to give</a>
+      <a class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,.5)" href="https://join.cclbparish.com">Register as a parishioner</a>
       <a class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,.5)" href="#contact">Contact the parish</a>
     </div>
     <p class="trust" id="hero-trust">We are baptised by his spirit</p>
