@@ -1,0 +1,15 @@
+# =============================================================
+# netlify.toml — security headers for join.cclbparish.com
+# Deploy this in the SAME folder as the join index.html.
+# The CSP below is like your donation site's, PLUS the rules
+# that let the embedded Tally form load (script + iframe).
+# =============================================================
+[[headers]]
+for = "/*"
+[headers.values]
+Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+X-Frame-Options = "DENY"
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "strict-origin-when-cross-origin"
+Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://tally.so https://*.tally.so; connect-src 'self' https://tally.so https://*.tally.so; frame-src https://tally.so https://*.tally.so; form-action 'self'; upgrade-insecure-requests"
