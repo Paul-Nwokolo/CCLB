@@ -119,7 +119,21 @@
   .site-footer h3{ color:#fff; margin-top:var(--s2); }
   .site-footer .footer-tag{ color:#aac2dc; }
   .site-footer .crest{ filter:drop-shadow(0 0 0 #fff); }
-  </style>
+  
+  /* Tally voting form card */
+  .vote-cta .section-head{ text-align:center; margin-bottom:var(--s4); }
+  .vote-cta .section-head h2{ font-size:clamp(1.5rem,3.5vw,2.1rem); color:var(--brand-900); }
+  .vote-cta .section-head .sub{ color:var(--ink-soft); max-width:38rem; margin:var(--s2) auto 0; }
+  .tally-card{
+    background:var(--surface); border:1px solid var(--line);
+    border-top:4px solid var(--gold);
+    border-radius:var(--r-lg); box-shadow:var(--shadow-lift);
+    padding:var(--s4); max-width:42rem; margin-inline:auto;
+  }
+  .tally-card iframe{ width:100%; border:0; display:block; background:transparent; }
+  .tally-card .fine{ color:var(--ink-soft); font-size:.95rem; text-align:center; margin:0; }
+  .tally-card .fine a{ color:var(--brand-700); font-weight:600; }
+</style>
 </head>
 <body id="top">
 
@@ -191,10 +205,29 @@
       </div>
     </section>
 
-    <section class="vote-cta">
+    <section class="vote-cta" id="cast-vote" aria-labelledby="cast-vote-title">
       <div class="wrap">
-        <a class="btn btn-primary" href="#" id="vote-link">Cast your vote</a>
-        <p class="sub" style="margin-top:var(--s3)">Voting closes 28 June 2026.</p>
+        <div class="section-head">
+          <h2 id="cast-vote-title">Cast your vote</h2>
+          <p class="sub">Choose your preferred theme and, if you wish, pledge an optional harvest donation. Voting closes 28 June 2026.</p>
+        </div>
+
+        <!-- ===== Tally standard embed =====
+             EDIT: replace YOUR_TALLY_FORM_ID_HERE (BOTH places below) with the real
+             form ID from Tally → Share → Embed → "Standard". Keep the query string —
+             it hides Tally's own title, makes the background transparent so it blends
+             with this navy card, and lets the iframe auto-resize to fit. -->
+        <div class="tally-card">
+          <iframe
+            data-tally-src="https://tally.so/embed/YOUR_TALLY_FORM_ID_HERE?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+            loading="lazy" width="100%" height="500" frameborder="0"
+            marginheight="0" marginwidth="0"
+            title="CCLB Harvest theme vote"></iframe>
+          <noscript>
+            <p class="fine">Please enable JavaScript to load the voting form, or
+            <a href="https://tally.so/r/YOUR_TALLY_FORM_ID_HERE">open the form in a new tab</a>.</p>
+          </noscript>
+        </div>
       </div>
     </section>
   </main>
@@ -208,5 +241,8 @@
     </div>
   </footer>
 
+
+  <!-- ===== Tally embed loader (official snippet: sets the iframe src and auto-resizes height) ===== -->
+  <script src="https://tally.so/widgets/embed.js"></script>
 </body>
 </html>
