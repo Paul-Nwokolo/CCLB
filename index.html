@@ -210,6 +210,13 @@
   @media (prefers-reduced-motion:reduce){
     *{ animation:none!important; transition:none!important; scroll-behavior:auto!important; }
   }
+
+  /* Parish life schedule (bulletin) */
+  .parish-life-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:var(--s3); margin:0; }
+  @media (max-width:640px){ .parish-life-grid{ grid-template-columns:1fr; } }
+  .parish-life-grid .pl-item{ background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:var(--s3) var(--s4); }
+  .parish-life-grid dt{ font-weight:600; color:var(--brand-900); }
+  .parish-life-grid dd{ margin:.25rem 0 0; color:var(--ink-soft); }
 </style>
 </head>
 
@@ -314,6 +321,26 @@
   <div class="wrap">
     <div class="section-head"><h2 id="hub-title">Stay connected</h2><p>Worship with us, follow along, and join parish life.</p></div>
     <div class="hub-grid" id="hub-grid"></div>
+  </div>
+</section>
+
+<!-- ======================= PARISH LIFE (from March 2026 bulletin) ======================= -->
+<section class="section section--band" id="parish-life" aria-labelledby="parish-life-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="parish-life-title">Sacraments &amp; parish life</h2>
+      <p>Regular devotions, classes and sacramental schedules at the parish.</p>
+    </div>
+    <dl class="parish-life-grid">
+      <div class="pl-item"><dt>Monthly Eucharistic Adoration</dt><dd>Last Friday of the month · 6:30 PM</dd></div>
+      <div class="pl-item"><dt>Communion to the Sick &amp; Aged</dt><dd>First Friday of the month · from 9:00 AM</dd></div>
+      <div class="pl-item"><dt>Catechism — Children</dt><dd>Saturdays · 9:00 AM</dd></div>
+      <div class="pl-item"><dt>Catechism — RCIA</dt><dd>Sundays · 11:00 AM</dd></div>
+      <div class="pl-item"><dt>Infant Baptism</dt><dd>First Saturday · 8:00 AM Mass</dd></div>
+      <div class="pl-item"><dt>Pre-Baptism Instructions</dt><dd>Parents &amp; godparents · last Saturday · 9:00 AM</dd></div>
+      <div class="pl-item"><dt>Small Christian Community (SCC)</dt><dd>1st &amp; 3rd Sundays · 5:00–6:00 PM</dd></div>
+      <div class="pl-item"><dt>Organizations Meeting</dt><dd>2nd Sunday of the month · 10:30 AM</dd></div>
+    </dl>
   </div>
 </section>
 
