@@ -72,6 +72,30 @@
   }
   .btn-ghost{ background:transparent; color:var(--brand-700); border-color:var(--line); }
 
+  /* Harvest account — mirrors the account layout/CSS on give.cclbparish.com */
+  .acct-band{ padding:var(--s5) 0 0; }
+  .acct-card{ background:var(--surface); border:1px solid var(--line); border-top:4px solid var(--gold);
+    border-radius:var(--r-lg); box-shadow:var(--shadow); padding:var(--s5); max-width:42rem; margin-inline:auto; }
+  .acct-heading{ font-size:1.5rem; color:var(--brand-900); margin-bottom:.2rem; }
+  .acct-intro{ color:var(--ink-soft); margin-bottom:var(--s4); }
+  .account{ border-top:1px solid var(--line); padding-top:var(--s4); margin-top:var(--s4); }
+  .account:first-of-type{ border-top:0; padding-top:0; margin-top:0; }
+  .field{ margin-bottom:var(--s3); }
+  .field .label{ font-size:.85rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--ink-soft); }
+  .field .value{ font-size:1.2rem; font-weight:600; color:var(--ink); }
+  .acct-number{ font-size:1.7rem; font-weight:700; letter-spacing:.12em; color:var(--brand-900);
+    font-variant-numeric:tabular-nums; font-feature-settings:"tnum"; word-break:break-word; }
+  .copy-row{ display:flex; flex-wrap:wrap; gap:var(--s2); align-items:center; margin-top:.5rem; }
+  .btn-copy{ min-height:48px; padding:.6rem 1.1rem; border-radius:var(--r-pill); background:var(--gold-soft);
+    color:var(--brand-900); border:2px solid transparent; font:inherit; font-weight:700; cursor:pointer;
+    display:inline-flex; align-items:center; gap:.4rem; }
+  .btn-copy:hover{ background:#e6d4a3; }
+  .btn-copy.copied{ background:var(--success-soft); color:var(--success); }
+  #toast{ position:fixed; left:50%; bottom:var(--s4); transform:translateX(-50%) translateY(2rem);
+    background:var(--brand-900); color:#fff; padding:.8rem 1.4rem; border-radius:var(--r-pill);
+    box-shadow:var(--shadow-lift); opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; z-index:60; font-weight:600; }
+  #toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
   /* Hero */
   .hero{ text-align:center; padding:var(--s7) 0 var(--s5); background:
       radial-gradient(1200px 400px at 50% -10%, var(--mist), transparent 70%); }
@@ -115,10 +139,12 @@
   .btn-primary{ background:var(--brand-700); color:#fff; box-shadow:var(--shadow); }
 
   /* Footer */
-  .site-footer{ background:var(--brand-900); color:#dce6f1; text-align:center; padding:var(--s6) 0; }
-  .site-footer h3{ color:#fff; margin-top:var(--s2); }
-  .site-footer .footer-tag{ color:#aac2dc; }
-  .site-footer .crest{ filter:drop-shadow(0 0 0 #fff); }
+  .site-footer{ background:var(--brand-900); color:rgba(255,255,255,.85); text-align:center; padding-block:var(--s6); }
+  .site-footer .crest{ display:inline-block; width:50px; height:50px; margin:0 auto var(--s3); box-shadow:inset 0 0 0 2px rgba(255,255,255,.35); }
+  .site-footer h3{ color:#fff; font-size:1.2rem; }
+  .site-footer p{ margin:.3rem 0; font-size:.95rem; }
+  .site-footer .tag{ font-style:italic; color:rgba(255,255,255,.9); }
+  .site-footer .fine{ color:rgba(255,255,255,.55); font-size:.82rem; margin-top:var(--s4); }
   
   /* Tally voting form card */
   .vote-cta .section-head{ text-align:center; margin-bottom:var(--s4); }
@@ -136,10 +162,11 @@
 </style>
 </head>
 <body id="top">
+  <div id="toast" role="status" aria-live="polite"></div>
 
   <header class="topbar">
     <div class="wrap">
-      <a class="brand-mark" href="#top" aria-label="Catholic Church of the Lord's Baptism — home">
+      <a class="brand-mark" href="https://cclbparish.com/" aria-label="Catholic Church of the Lord's Baptism — home">
         <span class="crest" role="img" aria-label="Church crest"></span>
         <span class="name">The Lord's Baptism</span>
       </a>
@@ -148,6 +175,32 @@
   </header>
 
   <main>
+    <!-- ===================== HARVEST ACCOUNT (first element below the nav) ===================== -->
+    <section class="acct-band" aria-labelledby="acct-title">
+      <div class="wrap">
+        <div class="acct-card">
+          <h2 id="acct-title" class="acct-heading">Harvest Account</h2>
+          <p class="acct-intro">Give to this year's Annual Harvest by transfer to the account below.</p>
+          <div class="account">
+            <div class="field">
+              <div class="label">Account name</div>
+              <div class="value">Catholic Church of the Lord's Baptism</div>
+              <div class="copy-row"><button class="btn-copy" type="button" data-copy="Catholic Church of the Lord's Baptism">Copy name</button></div>
+            </div>
+            <div class="field">
+              <div class="label">Bank</div>
+              <div class="value">Zenith Bank</div>
+            </div>
+            <div class="field">
+              <div class="label">Account number</div>
+              <div class="acct-number">1312 4872 04</div>
+              <div class="copy-row"><button class="btn-copy" type="button" data-copy="1312487204"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy account number</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="hero">
       <div class="wrap">
         <span class="eyebrow">Annual Church Harvest Celebration · 2026</span>
@@ -213,13 +266,12 @@
         </div>
 
         <!-- ===== Tally standard embed =====
-             EDIT: replace YOUR_TALLY_FORM_ID_HERE (BOTH places below) with the real
-             form ID from Tally → Share → Embed → "Standard". Keep the query string —
-             it hides Tally's own title, makes the background transparent so it blends
-             with this navy card, and lets the iframe auto-resize to fit. -->
+             Form ID is set to vGgp4X (matches the noscript fallback link below).
+             The query string hides Tally's own title, makes the background transparent so it
+             blends with this navy card, and lets the iframe auto-resize to fit. -->
         <div class="tally-card">
           <iframe
-            data-tally-src="https://tally.so/embed/YOUR_TALLY_FORM_ID_HERE?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+            data-tally-src="https://tally.so/embed/vGgp4X?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
             loading="lazy" width="100%" height="500" frameborder="0"
             marginheight="0" marginwidth="0"
             title="CCLB Harvest theme vote"></iframe>
@@ -236,13 +288,43 @@
     <div class="wrap">
       <span class="crest" role="img" aria-label="Church crest"></span>
       <h3>Catholic Church of the Lord's Baptism</h3>
-      <p class="footer-tag">We are baptised by his spirit</p>
-      <p>Osapa, off Beach Resort, Lekki, Lagos · +234 913 222 2286 · info@cclblekki.com</p>
+      <p class="tag">We are baptised by his spirit</p>
+      <p>Osapa London, off Beach Resort, Lekki, Lagos · <a href="mailto:info@cclblekki.com" style="color:#F0E4C4">info@cclblekki.com</a></p>
+      <p class="fine">© <span id="yr"></span> Catholic Church of the Lord's Baptism. Built and maintained by the CCLB Lekki.</p>
     </div>
   </footer>
 
 
-  <!-- ===== Tally embed loader (official snippet: sets the iframe src and auto-resizes height) ===== -->
-  <script src="https://tally.so/widgets/embed.js"></script>
+  <!-- ===== Tally embed loader (official snippet: sets the iframe src and auto-resizes height) + footer year ===== -->
+  <script>
+    (function () {
+      var src = "https://tally.so/widgets/embed.js";
+      var load = function () {
+        if (typeof Tally !== "undefined") { Tally.loadEmbeds(); return; }
+        document.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function (e) {
+          e.src = e.dataset.tallySrc;
+        });
+      };
+      if (typeof Tally !== "undefined") { load(); }
+      else if (!document.querySelector('script[src="' + src + '"]')) {
+        var s = document.createElement("script");
+        s.src = src; s.onload = load; s.onerror = load; document.body.appendChild(s);
+      }
+      var yrEl = document.getElementById("yr"); if (yrEl) yrEl.textContent = new Date().getFullYear();
+
+      /* copy-to-clipboard for the Harvest account (mirrors give.cclbparish.com) */
+      var toastTimer;
+      function toast(msg){ var t=document.getElementById("toast"); if(!t) return; t.textContent=msg; t.classList.add("show"); clearTimeout(toastTimer); toastTimer=setTimeout(function(){ t.classList.remove("show"); },2000); }
+      function done(btn){ var original=btn.dataset.original||btn.innerHTML; btn.dataset.original=original; btn.classList.add("copied"); btn.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Copied'; toast("Copied to clipboard"); setTimeout(function(){ btn.classList.remove("copied"); btn.innerHTML=original; },2200); }
+      function fallbackCopy(text, cb){ var t=document.createElement("textarea"); t.value=text; t.style.position="fixed"; t.style.opacity="0"; document.body.appendChild(t); t.focus(); t.select(); try{ document.execCommand("copy"); cb(); }catch(e){ toast("Press and hold to copy"); } document.body.removeChild(t); }
+      document.querySelectorAll(".btn-copy").forEach(function(b){
+        b.addEventListener("click", function(){
+          var text=b.dataset.copy;
+          if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(function(){done(b);}).catch(function(){ fallbackCopy(text, function(){done(b);}); }); }
+          else { fallbackCopy(text, function(){done(b);}); }
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
