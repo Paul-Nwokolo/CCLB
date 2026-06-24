@@ -189,10 +189,10 @@
   .contact-item a:hover{ text-decoration:underline; }
 
   .site-footer{ background:var(--brand-900); color:rgba(255,255,255,.85); text-align:center; padding-block:var(--s6); }
-  .site-footer .crest{ width:54px; height:54px; margin:0 auto var(--s3); }
-  .site-footer h3{ color:#fff; font-size:1.25rem; }
-  .site-footer p{ margin:.35rem 0; font-size:.95rem; }
-  .site-footer .footer-tag{ font-style:italic; color:rgba(255,255,255,.9); }
+  .site-footer .crest{ display:inline-block; width:50px; height:50px; margin:0 auto var(--s3); box-shadow:inset 0 0 0 2px rgba(255,255,255,.35); }
+  .site-footer h3{ color:#fff; font-size:1.2rem; }
+  .site-footer p{ margin:.3rem 0; font-size:.95rem; }
+  .site-footer .tag{ font-style:italic; color:rgba(255,255,255,.9); }
   .site-footer .fine{ color:rgba(255,255,255,.55); font-size:.82rem; margin-top:var(--s4); }
 
   /* hub (hidden until enabled) */
@@ -227,7 +227,7 @@
 <!-- ======================= TOP BAR ======================= -->
 <header class="topbar">
   <div class="wrap">
-    <a class="brand-mark" href="#top" aria-label="Catholic Church of the Lord's Baptism — home">
+    <a class="brand-mark" href="https://cclbparish.com/" aria-label="Catholic Church of the Lord's Baptism — home">
       <span class="crest" role="img" aria-label="Church crest"></span>
       <span class="name" id="brand-name">The Lord's Baptism</span>
     </a>
@@ -244,7 +244,6 @@
     <p class="lede" id="hero-lede">Every gift sustains the worship, works of mercy, and growth of our parish family. Thank you for giving.</p>
     <div class="cta-row">
       <a class="btn btn-gold" href="#give">See ways to give</a>
-      <a class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,.5)" href="https://join.cclbparish.com">Register as a parishioner</a>
       <a class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,.5)" href="#contact">Contact the parish</a>
     </div>
     <p class="trust" id="hero-trust">We are baptised by his spirit</p>
@@ -324,26 +323,6 @@
   </div>
 </section>
 
-<!-- ======================= PARISH LIFE (from March 2026 bulletin) ======================= -->
-<section class="section section--band" id="parish-life" aria-labelledby="parish-life-title">
-  <div class="wrap">
-    <div class="section-head">
-      <h2 id="parish-life-title">Sacraments &amp; parish life</h2>
-      <p>Regular devotions, classes and sacramental schedules at the parish.</p>
-    </div>
-    <dl class="parish-life-grid">
-      <div class="pl-item"><dt>Monthly Eucharistic Adoration</dt><dd>Last Friday of the month · 6:30 PM</dd></div>
-      <div class="pl-item"><dt>Communion to the Sick &amp; Aged</dt><dd>First Friday of the month · from 9:00 AM</dd></div>
-      <div class="pl-item"><dt>Catechism — Children</dt><dd>Saturdays · 9:00 AM</dd></div>
-      <div class="pl-item"><dt>Catechism — RCIA</dt><dd>Sundays · 11:00 AM</dd></div>
-      <div class="pl-item"><dt>Infant Baptism</dt><dd>First Saturday · 8:00 AM Mass</dd></div>
-      <div class="pl-item"><dt>Pre-Baptism Instructions</dt><dd>Parents &amp; godparents · last Saturday · 9:00 AM</dd></div>
-      <div class="pl-item"><dt>Small Christian Community (SCC)</dt><dd>1st &amp; 3rd Sundays · 5:00–6:00 PM</dd></div>
-      <div class="pl-item"><dt>Organizations Meeting</dt><dd>2nd Sunday of the month · 10:30 AM</dd></div>
-    </dl>
-  </div>
-</section>
-
 <!-- ======================= CONTACT ======================= -->
 <section class="section" id="contact" aria-labelledby="contact-title">
   <div class="wrap">
@@ -356,10 +335,10 @@
 <footer class="site-footer">
   <div class="wrap">
     <span class="crest" role="img" aria-label="Church crest"></span>
-    <h3 id="footer-name">Catholic Church of the Lord's Baptism</h3>
-    <p class="footer-tag" id="footer-tag">We are baptised by his spirit</p>
-    <p id="footer-contact"></p>
-    <p class="fine" id="footer-fine"></p>
+    <h3>Catholic Church of the Lord's Baptism</h3>
+    <p class="tag">We are baptised by his spirit</p>
+    <p>Osapa London, off Beach Resort, Lekki, Lagos · <a href="mailto:info@cclblekki.com" style="color:#F0E4C4">info@cclblekki.com</a></p>
+    <p class="fine">© <span id="yr"></span> Catholic Church of the Lord's Baptism. Built and maintained by the CCLB Lekki.</p>
   </div>
 </footer>
 
@@ -482,8 +461,6 @@
     $("#hero-title").textContent  = CONFIG.heroTitle;
     $("#hero-lede").textContent   = CONFIG.heroLede;
     $("#hero-trust").textContent  = CONFIG.trustLine;
-    $("#footer-name").textContent = CONFIG.churchName;
-    $("#footer-tag").textContent  = CONFIG.footerTag;
     document.title = "Give — " + CONFIG.churchName;
 
     /* copy to clipboard with fallback */
@@ -659,8 +636,7 @@
 
     const cg = $("#contact-grid");
     contactItems.forEach(it => cg.appendChild(el("div", { className: "contact-item" }, `${icon(it.ic)}<div><div class="ct-label">${esc(it.label)}</div>${it.value}</div>`)));
-    $("#footer-contact").innerHTML = [c.phone && esc(c.phone), c.email && esc(c.email)].filter(Boolean).join(" · ");
-    $("#footer-fine").textContent = "© " + new Date().getFullYear() + " " + CONFIG.churchName + ". " + CONFIG.footerCredit + ".";
+    const yrEl = document.getElementById("yr"); if (yrEl) yrEl.textContent = new Date().getFullYear();
 
     /* hub (optional) */
     if (CONFIG.showHub && CONFIG.hubLinks.length) {
