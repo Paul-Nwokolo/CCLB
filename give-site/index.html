@@ -70,20 +70,16 @@
   .skip{ position:absolute; left:var(--s3); top:-4rem; z-index:50; background:var(--brand-900); color:#fff; padding:.75rem 1.25rem; border-radius:var(--r); font-weight:600; transition:top .2s ease; }
   .skip:focus{ top:var(--s3); }
   :where(a,button,input,select,label,[tabindex]):focus-visible{ outline:3px solid var(--gold); outline-offset:3px; border-radius:6px; }
-  .visually-hidden{ position:absolute!important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
 
   /* ---- Buttons ---- */
   .btn{ display:inline-flex; align-items:center; justify-content:center; gap:.6rem; min-height:54px; padding:.85rem 1.5rem; border-radius:var(--r-pill); font:inherit; font-weight:700; text-decoration:none; cursor:pointer; border:2px solid transparent; transition:transform .12s ease, box-shadow .12s ease, background .12s ease; }
   .btn:active{ transform:translateY(1px); }
-  .btn-primary{ background:var(--brand-700); color:#fff; box-shadow:var(--shadow); }
-  .btn-primary:hover{ background:var(--brand-900); box-shadow:var(--shadow-lift); }
   .btn-gold{ background:var(--gold); color:var(--brand-900); }
   .btn-gold:hover{ background:#b88f37; }
   .btn-ghost{ background:transparent; color:var(--brand-900); border-color:var(--brand-700); }
   .btn-ghost:hover{ background:rgba(28,78,120,.07); }
   .btn-wa{ background:var(--success); color:#fff; width:100%; }
   .btn-wa:hover{ background:#235740; }
-  .btn-block{ width:100%; }
 
   /* ---- the crest (used in top bar, hero and footer) ---- */
   .crest{ background:var(--logo-url) center/contain no-repeat; flex:none; }
@@ -211,12 +207,6 @@
     *{ animation:none!important; transition:none!important; scroll-behavior:auto!important; }
   }
 
-  /* Parish life schedule (bulletin) */
-  .parish-life-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:var(--s3); margin:0; }
-  @media (max-width:640px){ .parish-life-grid{ grid-template-columns:1fr; } }
-  .parish-life-grid .pl-item{ background:var(--surface); border:1px solid var(--line); border-radius:var(--r); padding:var(--s3) var(--s4); }
-  .parish-life-grid dt{ font-weight:600; color:var(--brand-900); }
-  .parish-life-grid dd{ margin:.25rem 0 0; color:var(--ink-soft); }
 </style>
 </head>
 
@@ -235,6 +225,7 @@
   </div>
 </header>
 
+<main>
 <!-- ======================= HERO ======================= -->
 <section class="hero" id="top">
   <div class="wrap">
@@ -330,6 +321,7 @@
     <div class="contact-grid" id="contact-grid"></div>
   </div>
 </section>
+</main>
 
 <!-- ======================= FOOTER ======================= -->
 <footer class="site-footer">
@@ -515,7 +507,7 @@
       return `<div class="verify-note"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1C4E78" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg><span>Before sending, check the account name reads <strong>${esc(name)}</strong>. The parish never collects gifts through personal accounts.</span></div>`;
     }
     function confirmLinkHTML(msg) {
-      return `<a class="btn btn-wa" style="margin-top:1.25rem" href="${waLink(CONFIG.whatsappNumber, msg)}" target="_blank" rel="noopener">${waIcon} I've sent my gift — confirm</a>`;
+      return `<a class="btn btn-wa" style="margin-top:1.25rem" href="${waLink(CONFIG.whatsappNumber, msg)}" target="_blank" rel="noopener noreferrer">${waIcon} I've sent my gift — confirm</a>`;
     }
 
     /* fund chips */
@@ -625,7 +617,7 @@
       mail:  '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>'
     };
     const contactItems = [
-      c.address     && { label: "Address",         value: `<a href="${esc(c.mapUrl)}" target="_blank" rel="noopener">${esc(c.address)}</a>`, ic: I.pin },
+      c.address     && { label: "Address",         value: `<a href="${esc(c.mapUrl)}" target="_blank" rel="noopener noreferrer">${esc(c.address)}</a>`, ic: I.pin },
       c.sundayMass  && { label: "Sunday Mass",      value: `<span>${esc(c.sundayMass)}</span>`,  ic: I.clock },
       c.weekdayMass && { label: "Weekday Mass",     value: `<span>${esc(c.weekdayMass)}</span>`, ic: I.cal },
       c.confession  && { label: "Confession",       value: `<span>${esc(c.confession)}</span>`,  ic: I.cross },
@@ -645,7 +637,7 @@
       const hubIcon = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
       CONFIG.hubLinks.forEach(l => {
         const a = el("a", { className: "hub-link", href: l.url });
-        if (/^https?:/.test(l.url)) { a.target = "_blank"; a.rel = "noopener"; }
+        if (/^https?:/.test(l.url)) { a.target = "_blank"; a.rel = "noopener noreferrer"; }
         a.innerHTML = `<span class="ic" aria-hidden="true">${hubIcon}</span><span>${esc(l.label)}</span>`;
         grid.appendChild(a);
       });
