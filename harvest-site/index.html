@@ -136,7 +136,6 @@
 
   /* Vote action */
   .vote-cta{ text-align:center; padding:0 0 var(--s7); }
-  .btn-primary{ background:var(--brand-700); color:#fff; box-shadow:var(--shadow); }
 
   /* Footer */
   .site-footer{ background:var(--brand-900); color:rgba(255,255,255,.85); text-align:center; padding-block:var(--s6); }
@@ -177,57 +176,33 @@
   <main>
     <section class="hero">
       <div class="wrap">
-        <span class="eyebrow">Annual Church Harvest Celebration · 2026</span>
-        <h1>Choose our Harvest theme</h1>
-        <p class="lede">Three themes have been proposed for this year's Annual Church Harvest Celebration. Prayerfully consider each one, then cast your vote.</p>
-        <p class="close-badge" role="note">🗓️ Voting closes 1 July 2026</p>
+        <span class="eyebrow">Commitment Sunday · 2026</span>
+        <h1>Joyfully Commit to our Harvest of God's faithfulness</h1>
+        <p class="lede"><span>Giving back from God's Abundance.</span><br><span>Be the strongest link for God.</span></p>
       </div>
     </section>
 
-    <section class="themes" id="vote">
+    <section class="vote-cta" id="cast-vote" aria-labelledby="cast-vote-title">
       <div class="wrap">
-        <h2>The three proposed themes</h2>
-        <p class="sub">Tap a flyer to view it in full, then vote below.</p>
-        <div class="theme-grid">
+        <div class="section-head">
+          <h2 id="cast-vote-title">Make your commitment</h2>
+          <p class="sub">Complete the form below to make your Commitment Sunday pledge towards this year's Harvest of God's faithfulness.</p>
+        </div>
 
-        <article class="theme-card">
-          <div class="theme-media" role="button" tabindex="0">
-            <img src="theme-1-divine-possibility.jpg" width="640" height="1396"
-                 alt="Option 1 — Harvest of Divine Possibilities: With God, all things are possible. (Matthew 19:26)" loading="lazy" />
-          </div>
-          <div class="theme-body">
-            <span class="theme-num">Option 1</span>
-            <h3 class="theme-title">Harvest of Divine Possibilities</h3>
-            <p class="theme-verse">“With God, all things are possible.”</p>
-            <p class="theme-ref">— Matthew 19:26</p>
-          </div>
-        </article>
-
-        <article class="theme-card">
-          <div class="theme-media" role="button" tabindex="0">
-            <img src="theme-2-love-and-unity.jpg" width="640" height="1407"
-                 alt="Option 2 — Harvest of Love and Unity: One body, one Spirit, one family in Christ. (Galatians 3:28)" loading="lazy" />
-          </div>
-          <div class="theme-body">
-            <span class="theme-num">Option 2</span>
-            <h3 class="theme-title">Harvest of Love and Unity</h3>
-            <p class="theme-verse">“One body, one Spirit, one family in Christ.”</p>
-            <p class="theme-ref">— Galatians 3:28</p>
-          </div>
-        </article>
-
-        <article class="theme-card">
-          <div class="theme-media" role="button" tabindex="0">
-            <img src="theme-3-gods-faithfulness.jpg" width="640" height="1387"
-                 alt="Option 3 — Harvest of God's Faithfulness: His faithfulness endures forever. (Lamentations 3:23)" loading="lazy" />
-          </div>
-          <div class="theme-body">
-            <span class="theme-num">Option 3</span>
-            <h3 class="theme-title">Harvest of God's Faithfulness</h3>
-            <p class="theme-verse">“His faithfulness endures forever.”</p>
-            <p class="theme-ref">— Lamentations 3:23</p>
-          </div>
-        </article>
+        <!-- ===== Tally standard embed =====
+             Form ID is set to vGgp4X (matches the noscript fallback link below).
+             The query string hides Tally's own title, makes the background transparent so it
+             blends with this navy card, and lets the iframe auto-resize to fit. -->
+        <div class="tally-card">
+          <iframe
+            data-tally-src="https://tally.so/embed/vGgp4X?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+            loading="lazy" width="100%" height="500" frameborder="0"
+            marginheight="0" marginwidth="0"
+            title="CCLB Harvest theme vote"></iframe>
+          <noscript>
+            <p class="fine">Please enable JavaScript to load the voting form, or
+            <a href="https://tally.so/r/vGgp4X">open the form in a new tab</a>.</p>
+          </noscript>
         </div>
       </div>
     </section>
@@ -258,27 +233,32 @@
       </div>
     </section>
 
-    <section class="vote-cta" id="cast-vote" aria-labelledby="cast-vote-title">
+    <section class="themes" id="vote">
       <div class="wrap">
-        <div class="section-head">
-          <h2 id="cast-vote-title">Cast your vote</h2>
-          <p class="sub">Choose your preferred theme and, if you wish, pledge an optional harvest donation. Voting closes 1 July 2026.</p>
-        </div>
+        <h2>Harvest Theme</h2>
+        <p class="sub">Tap an image to view it in full.</p>
+        <div class="theme-grid">
 
-        <!-- ===== Tally standard embed =====
-             Form ID is set to vGgp4X (matches the noscript fallback link below).
-             The query string hides Tally's own title, makes the background transparent so it
-             blends with this navy card, and lets the iframe auto-resize to fit. -->
-        <div class="tally-card">
-          <iframe
-            data-tally-src="https://tally.so/embed/vGgp4X?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-            loading="lazy" width="100%" height="500" frameborder="0"
-            marginheight="0" marginwidth="0"
-            title="CCLB Harvest theme vote"></iframe>
-          <noscript>
-            <p class="fine">Please enable JavaScript to load the voting form, or
-            <a href="https://tally.so/r/vGgp4X">open the form in a new tab</a>.</p>
-          </noscript>
+        <article class="theme-card">
+          <div class="theme-media" role="button" tabindex="0">
+            <img src="Harvest-of-Gods-Faithfulness-Poster-1.jpg"
+                 alt="Harvest of God's Faithfulness — poster 1 for the Annual Church Harvest Celebration at the Catholic Church of the Lord's Baptism, Osapa Lekki." loading="lazy" decoding="async" />
+          </div>
+        </article>
+
+        <article class="theme-card">
+          <div class="theme-media" role="button" tabindex="0">
+            <img src="Harvest-of-Gods-Faithfulness-Poster-2.jpg"
+                 alt="Harvest of God's Faithfulness — poster 2 for the Annual Church Harvest Celebration at the Catholic Church of the Lord's Baptism, Osapa Lekki." loading="lazy" decoding="async" />
+          </div>
+        </article>
+
+        <article class="theme-card">
+          <div class="theme-media" role="button" tabindex="0">
+            <img src="Harvest-of-Gods-Faithfulness-Poster-3.jpg"
+                 alt="Harvest of God's Faithfulness — poster 3 for the Annual Church Harvest Celebration at the Catholic Church of the Lord's Baptism, Osapa Lekki." loading="lazy" decoding="async" />
+          </div>
+        </article>
         </div>
       </div>
     </section>
@@ -326,5 +306,5 @@
       });
     })();
   </script>
-<div class="flyer-lightbox" id="flyerLightbox" aria-hidden="true"><button class="flyer-close" type="button" aria-label="Close">&times;</button><img id="flyerLightboxImg" src="" alt="Flyer full view" /></div><script>(function(){var box=document.getElementById('flyerLightbox');var boxImg=document.getElementById('flyerLightboxImg');function openBox(src,alt){boxImg.src=src;boxImg.alt=alt||'Flyer full view';box.classList.add('open');box.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}function closeBox(){box.classList.remove('open');box.setAttribute('aria-hidden','true');boxImg.src='';document.body.style.overflow='';}document.querySelectorAll('.theme-media').forEach(function(m){var img=m.querySelector('img');if(!img)return;m.addEventListener('click',function(){openBox(img.currentSrc||img.src,img.alt);});m.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openBox(img.currentSrc||img.src,img.alt);}});});box.addEventListener('click',function(e){if(e.target===box||e.target.classList.contains('flyer-close'))closeBox();});document.addEventListener('keydown',function(e){if(e.key==='Escape')closeBox();});})();</script></body>
+<div class="flyer-lightbox" id="flyerLightbox" aria-hidden="true"><button class="flyer-close" type="button" aria-label="Close">&times;</button><img id="flyerLightboxImg" src="" alt="Flyer full view" decoding="async" /></div><script>(function(){var box=document.getElementById('flyerLightbox');var boxImg=document.getElementById('flyerLightboxImg');function openBox(src,alt){boxImg.src=src;boxImg.alt=alt||'Flyer full view';box.classList.add('open');box.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}function closeBox(){box.classList.remove('open');box.setAttribute('aria-hidden','true');boxImg.src='';document.body.style.overflow='';}document.querySelectorAll('.theme-media').forEach(function(m){var img=m.querySelector('img');if(!img)return;m.addEventListener('click',function(){openBox(img.currentSrc||img.src,img.alt);});m.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openBox(img.currentSrc||img.src,img.alt);}});});box.addEventListener('click',function(e){if(e.target===box||e.target.classList.contains('flyer-close'))closeBox();});document.addEventListener('keydown',function(e){if(e.key==='Escape')closeBox();});})();</script></body>
 </html>
