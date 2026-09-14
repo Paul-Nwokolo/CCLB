@@ -22,6 +22,6 @@ test('shared.css files are byte-identical across all migrated sites', () => {
 
   const reference = contents[0];
   for (let i = 1; i < contents.length; i++) {
-    expect(contents[i].content, \\/shared.css does not match \/shared.css\).toBe(reference.content);
+    expect(contents[i].content, contents[i].site + '/shared.css does not match ' + reference.site + '/shared.css').toBe(reference.content);
   }
 });
