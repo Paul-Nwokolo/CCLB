@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
-const SITES = ['give-site', 'harvest-site', 'hub-site', 'join-site'];
+const ROUTES = ['/', '/give/', '/harvest/', '/join/'];
 
 test.describe('Accessibility Scans', () => {
   test.beforeEach(async ({ page }) => {
@@ -11,9 +11,9 @@ test.describe('Accessibility Scans', () => {
     await page.route('https://tally.so/**', route => route.abort());
   });
 
-  for (const site of SITES) {
-    test(`should pass axe-core scan on ${site}`, async ({ page }) => {
-      await page.goto(`/${site}/index.html`);
+  for (const route of ROUTES) {
+    test(`should pass axe-core scan on ${route}`, async ({ page }) => {
+      await page.goto(route);
       
       const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
       
