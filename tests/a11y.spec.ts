@@ -12,7 +12,7 @@ test.describe('Accessibility Scans', () => {
   });
 
   for (const route of ROUTES) {
-    test(\should pass axe-core scan on \\, async ({ page }) => {
+    test(`should pass axe-core scan on ${route}`, async ({ page }) => {
       await page.goto(route);
       
       const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
