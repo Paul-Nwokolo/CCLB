@@ -21,14 +21,14 @@ logo_url: https://decapbridge.com/decapcms-with-bridge.svg
 # Add site links in Decap CMS (optional)
 site_url: https://cclbparish.com
 
-media_folder: "hub-site/images/gallery"
+media_folder: "images/gallery"
 public_folder: "images/gallery"
 
 collections:
   - name: "content"
     label: "Content Management"
     files:
-      - file: "hub-site/data/gallery.json"
+      - file: "data/gallery.json"
         label: "Photo Gallery"
         name: "gallery"
         fields:
@@ -51,3 +51,4 @@ collections:
                 widget: "string"
                 required: true
                 hint: "Describe the image or video for screen readers."
+

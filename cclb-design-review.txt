@@ -1,0 +1,883 @@
+================================================================================
+CCLB PARISH SITES — UI/UX DESIGN REVIEW
+Catholic Church of the Lord's Baptism, Osapa / Lekki, Lagos
+Reviewed: 15 September 2026
+Scope: cclbparish.com, give., harvest., join.  — analysis only, nothing changed
+================================================================================
+
+HOW THIS WAS MEASURED (read this first — it affects how much to trust each item)
+
+Each page was rendered at an exact layout viewport of 375, 768 and 1280 CSS px
+and measured in the live DOM: computed font sizes, element rectangles, tap-target
+sizes, gaps to nearest interactive neighbour, horizontal overflow, section
+heights and above-the-fold inventories.
+
+The three widths could not be produced by resizing the browser window — the tab's
+render surface is fixed, so window resizing never changed the layout viewport and
+no mobile media query ever fired. Instead each page was re-rendered from its own
+origin into a same-origin frame of exactly the target width, with the desktop
+scrollbar suppressed so that both the layout viewport and the `vw` unit equal the
+target exactly.
+
+The method was validated before use: at a matched 831px viewport the harness
+reproduced the real page's values exactly — h1 41.55px, h2 36px, body 13.6px,
+document height 3255px, hub card 324px — identical on every metric. Numbers below
+can be treated as real measurements, with two disclosed exceptions:
+
+  (a) Third-party Tally embeds do not load inside the harness. The empty form box
+      is a harness artifact, NOT a site defect. Tally was verified separately on
+      the live page and it loads correctly (see HARVEST / JOIN notes).
+  (b) Because Tally did not load, page heights for harvest and join are measured
+      with the form at its initial height attribute (500 / 520px). Real pages are
+      taller once the form expands.
+
+Anything not directly observed is labelled INFERENCE. Everything else was seen or
+measured. Contrast was only computed where the background is a solid colour; over
+gradient/image backgrounds it is reported as not verifiable rather than guessed.
+
+Screenshots: captured at each width and shown inline in the chat transcript
+alongside this review (the browser capture in this environment returns images to
+the conversation and cannot write image files, so they could not be bundled).
+Captures referenced below: hub 375 fold, hub 768 fold, hub social band 1:1,
+hub carousel 375, give 375 fold, harvest 375 fold, join 375 fold.
+
+
+================================================================================
+1. FIRST IMPRESSION AT 375px — WHAT IS ABOVE THE FOLD
+================================================================================
+Fold = 812px tall (iPhone-class). All values measured.
+
+HUB (cclbparish.com) — document 4039px, 5.0 screens
+  Visible: crest, h1 "Catholic Church of the Lord's Baptism" (y197-270),
+  "FAITH · COMMUNITY · SERVICE" (y282), intro line (y321-380), then the Give card
+  (y460-757) complete with its "Open →" link at y696. The Harvest card begins at
+  y781 — only its top edge shows.
+  Primary action: obvious but singular. The hero consumes 428px (53% of the fold)
+  and the first 197px of it is crest and empty space before any words.
+
+GIVE (give.cclbparish.com) — document 5124px, 6.3 screens
+  Visible: sticky topbar (67px) with crest + "The Lord's Baptism" + outlined
+  "Give" pill; navy hero with a SECOND, larger crest; gold eyebrow; h1 "Your
+  generosity ripples outward" (y317-401); supporting paragraph; gold pill
+  "See ways to give" (y520-581); outlined "Contact the parish" (y593-654).
+  Primary action: clearest of the four. Both CTAs sit above the fold.
+  Two crests appear within the first ~400px.
+
+HARVEST (harvest.cclbparish.com) — document 4673px, 5.8 screens
+  Visible: topbar (71px) with crest + "Harvest" pill; light hero (only 321px);
+  eyebrow "COMMITMENT SUNDAY · 2026"; h1 "Joyfully Commit to our Harvest of God's
+  Faithfulness" (y174-284, three lines); two tagline lines; h2 "Make your
+  commitment" (y392); instruction paragraph (y431-521); then the form container.
+  Primary action: the form itself is the action, and its top is reachable in the
+  first screen. Best vertical economy of the four above the fold.
+
+JOIN (join.cclbparish.com) — document 2236px, 2.8 screens
+  Visible: topbar (71px) whose pill reads "Give", not "Join"; navy hero (391px);
+  eyebrow; h1 "Register as a parishioner" (y194-267); paragraph (y283-374);
+  then h2 "How we use your information" (y583) and 291px of privacy prose.
+  Primary action: NOT visible and not implied. The registration form starts at
+  y1248 — 1.5 screens down. The fold is hero plus legal text.
+
+
+================================================================================
+2. PER-SITE FINDINGS
+================================================================================
+
+--------------------------------------------------------------------------------
+HUB — cclbparish.com
+--------------------------------------------------------------------------------
+BREAKS ON MOBILE
+  H-1  Carousel dots are 14x14px with 12px gaps.
+       Measured at 375: buttons "Go to slide 1" and "Go to slide 2", 14x14px,
+       y1378, 12px apart. Against a 44px minimum this is roughly a tenth of the
+       required area. The adjacent arrows are correctly 44x44px, which makes the
+       dots look like an oversight rather than a decision.
+  H-2  Phone and email in the contact block are 20px-tall link targets.
+       Measured: tel link 156x20 (y3301), mailto 155x20 (y3369), 47px apart.
+       Each row *looks* like a large target because a ~64px navy circle icon sits
+       beside it, but the icon is outside the anchor — verified, the anchor
+       contains no SVG. Only the 20px text line is tappable.
+  H-3  Footer email is a 162x21px target (y3874).
+
+INCONSISTENT
+  H-4  No topbar at all. Give, harvest and join each have a sticky topbar
+       (67 / 71 / 71px) with crest, wordmark and a pill. The hub — the page
+       visitors land on — has no persistent header, so there is nothing to
+       return to and no visible brand once the hero scrolls away.
+  H-5  Two of four section headings are invisible; two are not.
+       Verified: `#gallery .section-head` and `#social .section-head` both carry
+       `visually-hidden` (position:absolute, clip:rect(0,0,0,0)). So
+       "Parish Photo Gallery" and "Connect with Us" are screen-reader only, while
+       "Sacrament and Church Life" and "Visit or reach us" render normally. This
+       is why both the photo strip and the social band read as unlabelled objects
+       floating in a band.
+  H-6  h3 does not scale with viewport. h1 and h2 both scale (h1 32 → 38.4 → 48px;
+       h2 27.2 → 36 → 36px across 375/768/1280), but h3 is frozen at 21.06px at
+       every width. At 768 the result is h1 38.4px against h2 36px — a 6%
+       difference, so the two top levels read as one level.
+  H-7  Footer heading is 21.06px here and 19.2px on all three other sites.
+
+POLISH
+  H-8  The hub does not link to join.cclbparish.com.
+       Verified: the complete anchor list is Give, Harvest, Google Maps, tel,
+       mailto, Instagram, mailto. Searching the rendered body for "join.cclb"
+       returns nothing. The parishioner-registration site is unreachable from
+       the hub; only two of the three destination cards exist.
+  H-9  Mass times sit ~2700px down (screen 4 of 5), inside the contact section
+       (labels ADDRESS / SUNDAY MASS / WEEKDAY MASS / CONFESSION / OFFICE HOURS /
+       PHONE / EMAIL), below a 1221px "Sacrament and Church Life" band. The same
+       Sunday Mass time is then repeated in the footer. For most parish-site
+       visitors this is the single most-wanted fact and it is the furthest thing
+       down. (That Mass times are a top visitor need is INFERENCE from general
+       parish-site practice, not from anything measured here.)
+  H-10 The photo gallery is stock imagery. Both slides load from
+       images.unsplash.com at 800x450 natural. The visible first slide is a
+       social gathering under string lights; its alt text reads "Parishioners
+       gathered in worship", which the photograph does not depict. The section is
+       titled "Parish Photo Gallery" (invisibly, per H-5).
+  H-11 Hero spends 197px before the first word at 375px.
+  H-12 "Sacrament and Church Life" runs 1221px at 375px — 1.5 screens of cards
+       between the gallery and the contact details.
+  H-13 Cards are capped at 324px wide, so at 1280 two 324px cards sit in a
+       1280px viewport and the hub section collapses to 393px tall. Restrained,
+       but currently reads as under-filled rather than deliberate.
+  H-14 At 768 the two cards stay stacked (Give y437, Harvest y758) and the
+       column is centred with wide empty gutters; they only go side-by-side above
+       768. iPad portrait gets the phone layout.
+
+NOT A DEFECT (checked and cleared)
+  - No horizontal overflow at any width (scrollWidth === viewport at 375/768/1280).
+  - The off-viewport carousel slide (left 359 → right 702 at 375) is correctly
+    clipped by its container; the document does not scroll sideways.
+  - No contrast failures found in the solid-background areas.
+  - "Skip to content" measuring 1x1px is the standard visually-hidden pattern.
+
+--------------------------------------------------------------------------------
+GIVE — give.cclbparish.com
+--------------------------------------------------------------------------------
+BREAKS ON MOBILE
+  G-1  Form inputs and the confirm button are 261px wide inside a 375px viewport.
+       Measured: three `field-input` at 261x59, a select at 261x54, and two
+       261x91 buttons. The card they sit in is 327px wide, so roughly 66px of
+       usable width is lost to nested padding. Same root cause as J-1 below.
+  G-2  Fund-choice chips are stacked 11-12px apart.
+       Measured: 327x83 (y1653), 207x53 (y1747), 301x53 (y1812), 188x53 (y1877),
+       nearest-neighbour gaps 11-12px. Heights pass; the vertical separation does
+       not, and mis-taps between adjacent funds are the most consequential
+       mis-tap on the site.
+  G-3  The two hero CTAs are 12px apart ("See ways to give" 193x61 y520;
+       "Contact the parish" 210x61 y593).
+  G-4  Topbar brand link is 200x40 — 40px tall, 4px under the minimum.
+  G-5  Contact phone 156x20, email 155x20, footer email 137x17.
+
+INCONSISTENT
+  G-6  Six different body-text sizes on one page: 19.2, 18, 16, 15.2, 13.6,
+       13.12px. The hub uses two (18 and 13.6).
+  G-7  Three different h3 sizes on one page: 18.4, 19.2 and 25.6px.
+  G-8  Mixed button radii and heights. Measured: one 207x54 at radius 14px, and
+       others at radius 999px with heights 53, 61 and 83px. A 14px-radius button
+       and a fully-rounded pill appear on the same page.
+  G-9  h1 is 36.8px at 375 and 56px at 768 — against the hub's 32px and 38.4px
+       at the same widths. Give's headline is 46% larger than the hub's at 768.
+  G-10 Line length reaches 85 characters at 768 (paragraph widths 480-592px).
+       Comfortable is roughly 45-75.
+  G-11 Two crests inside the first 400px — one in the topbar, one in the hero.
+
+POLISH
+  G-12 A "Stay connected" section exists but is switched off.
+       Verified: `section.section.section--band` containing the heading
+       "Stay connected", the line "Worship with us, follow along, and join
+       parish life.", and an empty `.hub-grid`, all under `display:none`.
+       This is already the right scaffold for the social treatment proposed in
+       section 4 — it needs content, not construction.
+  G-13 No social links anywhere. External anchors are only: cclbparish.com,
+       wa.me (WhatsApp) and maps.google.com.
+  G-14 Hero occupies 782px of an 812px fold. The primary CTA clears it at y520,
+       so this works — but there is no headroom left.
+  G-15 No layout change above 768px: document height is 4323px and every section
+       height is identical at 768 and 1280. The widest screens get the tablet
+       layout.
+
+NOT A DEFECT (checked and cleared)
+  - Apparent contrast failures in the hero (1.03:1 on the h1 and lead paragraph)
+    are FALSE POSITIVES. The hero's background-color is transparent with a
+    radial+linear gradient behind it; the h1 is #fff on a dark gradient. Contrast
+    there is not machine-verifiable and looked correct on screen.
+  - The topbar "Give" pill (75x46) points to the in-page anchor #give. Correct.
+  - No horizontal overflow at any width.
+
+--------------------------------------------------------------------------------
+HARVEST — harvest.cclbparish.com
+--------------------------------------------------------------------------------
+BREAKS ON MOBILE
+  V-1  The commitment form is 293px wide in a 375px viewport, and its container
+       declares height="500". On the live page Tally expands it to 1346px once
+       loaded — an 846px jump. On mobile data that shift lands late, after the
+       visitor has started reading, and moves everything below it. Reserve the
+       space or set a min-height.
+  V-2  Topbar brand link is 216x40 — 40px tall.
+  V-3  Footer email is 137x17.
+
+INCONSISTENT
+  V-4  Two different h2 sizes on one page at 768: "Make your commitment" and
+       "Harvest Theme" at 26.88px, "Harvest Account" at 24px.
+  V-5  h2 is 24px here against 27.2px on hub and give.
+  V-6  The hero is a light band 321px tall, while give's hero is a 782px navy
+       gradient panel. Arriving from give feels like a different site.
+  V-7  Topbar is 71px; give's is 67px.
+  V-8  Line length reaches 85 characters at 768 (paragraph widths 606-736px).
+
+POLISH
+  V-9  Three posters total ~413KB (154,740 + 135,247 + 133,142 bytes) and are
+       519x1280 natural, rendered 341x744 at 375px. They are `loading="lazy"`,
+       which is correct. Two notes: at 2x device pixel ratio a 341px-wide slot
+       wants ~682px of image, so 519px will look slightly soft; and object-fit is
+       `cover` against a declared aspect-ratio of 640/1397 (0.458) while the files
+       are 0.405 — so roughly 11% of each poster's height is cropped. Posters
+       usually carry text near the edges, so this is worth a visual check.
+       (That specific text is being clipped is INFERENCE — I measured the
+       aspect-ratio mismatch and the crop mode, not the poster artwork.)
+  V-10 The "Harvest Theme" section runs 2500px at 375 and 2772px at 768 — about
+       three screens — then collapses to 909px at 1280 when posters go
+       side-by-side. Phones get by far the longest version.
+  V-11 The lightbox image ships with an empty `src=""` inside `.flyer-lightbox`.
+       It is filled on click, so behaviour is fine, but an empty src makes some
+       browsers issue a redundant request against the page URL. Use a removed
+       attribute or a 1px placeholder.
+  V-12 No social links. The only external anchor is cclbparish.com.
+  V-13 Document is 4673px at 375 with the form collapsed; taller in reality.
+
+NOT A DEFECT (checked and cleared)
+  - The posters reporting naturalWidth 0x0 in the harness are simply lazy and
+    not yet in view, NOT broken. Fetched directly they return HTTP 200 and decode
+    to 519x1280 / 519x1280 / 521x1280.
+  - The empty form box in the harness capture is the disclosed harness artifact.
+    Tally loads on the live page.
+  - No horizontal overflow at any width.
+
+--------------------------------------------------------------------------------
+JOIN — join.cclbparish.com
+--------------------------------------------------------------------------------
+BREAKS ON MOBILE
+  J-1  The privacy notice collapses to a 175px text column at 375px — the worst
+       single defect across the four sites.
+       Measured: two paragraphs at 16px/26.4px line-height, each 175px wide,
+       wrapping at 22 and 20 characters per line, running 11 and 10 lines
+       (290px + 264px = 554px of prose; 608px for the whole block including its
+       heading) to carry just 435 characters of text.
+       Root cause, measured up the tree:
+         .wrap    375px, padding 0 24px   → 327
+         .card    327px, padding 32px     → 263
+         .notice  261px, display:flex row, padding 24px, gap 11.2px
+         text div 175px  (261 − 48 padding − 11.2 gap − ~26 icon)
+       160px of horizontal padding plus a flex icon consume 53% of the viewport.
+       At 768 the same column is 535px and wraps at 60-65 characters, which is
+       correct — so this is purely a small-screen failure, not a design choice.
+       Fix: collapse the nested paddings at small widths and let the icon sit
+       above the text rather than beside it.
+  J-2  The registration form is 261px wide in a 375px viewport, with
+       height="520" declared and the same expand-on-load shift as V-1.
+  J-3  Topbar brand link is 200x40 — 40px tall.
+  J-4  Footer email is 137x17, and it is the only other tappable thing on the
+       page. The entire page has just three interactive elements outside the
+       form: brand (200x40), the pill (80x51), footer email (137x17). Two of the
+       three are under 44px.
+
+INCONSISTENT
+  J-5  h2 is 17.6px while body text on the same page is 18.4px — the heading is
+       SMALLER than the paragraph beneath it. Hierarchy is inverted, and this
+       holds at all three widths.
+  J-6  h2 across the four sites: 27.2px (hub), 27.2px (give), 24px/26.88px
+       (harvest), 17.6px (join). A 10px spread on the same semantic level.
+  J-7  The topbar pill reads "Give" and links to give.cclbparish.com. On give the
+       pill is "Give" and on harvest it is "Harvest" — both self-referential. On
+       join it advertises a different site, so the pattern means two different
+       things depending on where you are, and the registration page's only styled
+       button points away from registration.
+  J-8  The crest is a `span.crest` with a CSS background-image here; on give and
+       harvest it is an `<img>`. Same mark, two implementations — so it cannot
+       carry alt text or be lazy-loaded consistently.
+  J-9  No styled buttons at all: the measured button-with-background list is
+       empty. Give has eight distinct filled button styles.
+  J-10 Line length reaches 85 characters at 768.
+  J-11 No layout change above 768: document height 1713px at both 768 and 1280.
+
+POLISH
+  J-12 The privacy notice takes the prime slot. It starts at y583 and runs 608px;
+       the form does not begin until y1248. On a registration page the form
+       should be the first thing after the hero, with the notice adjacent to the
+       submit action or collapsed behind a disclosure.
+  J-13 No social links. External anchors are cclbparish.com and give.cclbparish.com.
+
+NOT A DEFECT (checked and cleared)
+  - No horizontal overflow at any width.
+  - Shortest site of the four (2.8 screens at 375) — appropriate for its job.
+
+
+================================================================================
+3. CROSS-SITE: WHAT A VISITOR MOVING BETWEEN THESE PAGES WOULD NOTICE
+================================================================================
+
+3.1 HEADING SCALE — the most visible drift
+    h1 at 375 / 768 / 1280:
+      hub      32    / 38.4 / 48
+      give     36.8  / 56   / 56
+      harvest  32    / 38.4 / (not captured at 1280)
+      join     32    / 48   / 48
+    h2 at 375:  hub 27.2 · give 27.2 · harvest 24 · join 17.6
+    h3:         hub 21.06 (fixed at all widths) · give 18.4 / 19.2 / 25.6 ·
+                harvest 19.2 · join 19.2
+    Give's h1 at 768 is 56px against the hub's 38.4px. Join's h2 is 17.6px
+    against the hub's 27.2px. Standardise on one type ramp with one set of
+    breakpoints, and let every page draw from it.
+
+3.2 BODY TEXT
+    hub 2 sizes (18, 13.6) · give 6 sizes (19.2, 18, 16, 15.2, 13.6, 13.12) ·
+    harvest 3 (18, 15.2, 13.12) · join 4 (18.4, 16, 15.2, 13.12).
+    Seven distinct sizes (19.2, 18.4, 18, 16, 15.2, 13.6, 13.12) across fifteen
+    declarations, for what should be three roles: lead, body, label.
+
+3.3 BUTTONS
+    give:    eight filled variants — radius 14px AND radius 999px on the same
+             page, heights 53 / 54 / 61 / 83px
+    harvest: two variants, both radius 999px, height 53px
+    hub:     no filled buttons; card links and 44px icon circles only
+    join:    none
+    Pick one pill (one radius, one height, one padding) and one secondary style.
+
+3.4 HEADER
+    hub none · give 67px · harvest 71px · join 71px.
+    Pill label: give "Give" (in-page anchor) · harvest "Harvest" (in-page) ·
+    join "Give" (off-site). Give the hub the same topbar and make the pill mean
+    one thing everywhere.
+
+3.5 HERO
+    hub 428px light · give 782px navy gradient with a second crest ·
+    harvest 321px light · join 391px navy.
+    Two heroes are dark, two are light, and they differ 2.4x in height. Pick one
+    hero pattern with one height band.
+
+3.6 SECTION HEADINGS
+    On the hub, `#gallery` and `#social` headings are `visually-hidden` while
+    `#church-life` and `#contact` are visible. Either a section has a visible
+    heading or it does not — this should not vary within one page.
+
+3.7 CREST
+    `<img>` on give and harvest; `span` + CSS background-image on join; `<img>`
+    on the hub. Give consumes two crests in its first 400px.
+
+3.8 FOOTER
+    Heights at 375: hub 410 · give 372 · harvest 341 · join 372.
+    Footer h3: 21.06px on the hub, 19.2px elsewhere. Footer email is a 17-21px
+    target on every site. The footer is the one component that is nearly
+    identical already — worth making it literally identical.
+
+3.9 TAP TARGETS — the same four failures repeat everywhere
+    (a) topbar brand link 40px tall — give, harvest, join
+    (b) contact phone/email 20px tall — hub, give
+    (c) footer email 17-21px tall — all four
+    (d) carousel dots 14x14px — hub
+    Fixing (a)-(c) is a shared-component change, not four separate fixes.
+
+3.10 CONTENT WIDTH ON SMALL SCREENS
+    Interactive content is systematically inset at 375: give inputs 261px,
+    join form 261px, join notice text 175px, harvest form 293px — all inside a
+    327px card in a 375px viewport. One mobile padding scale (say 16px at the
+    wrap, 20px at the card, 0 nesting below that) recovers 60-150px of width
+    across all four sites.
+
+3.11 DESKTOP IS UNSERVED
+    give, harvest and join are byte-identical in layout at 768 and 1280
+    (give 4323px, join 1713px at both). Only the hub responds above 768 — and it
+    does so at an awkward threshold, going two-up somewhere between 768 and 831,
+    so iPad portrait gets the phone layout.
+
+
+================================================================================
+4. THE SOCIAL SECTION — WHAT IT IS NOW AND WHAT TO DO
+================================================================================
+
+WHAT IS THERE (measured, hub at 375)
+  section#social — 375x172px, padding 64px 0, background rgb(237,242,248)
+  ├─ div.section-head.visually-hidden → h2 "Connect with Us" (27.2px, INVISIBLE)
+  └─ ul.social-bar — display:flex, gap:16px, justify-content:center, 1 child
+     └─ a 44x44px, background rgb(16,42,67), border-radius 999px,
+        SVG 24x24 in rgb(201,162,75) → instagram.com/cclblekki/
+  Nearest other interactive element: 132.6px away.
+
+So: 172 vertical pixels, a full-width tonal band, an invisible heading, and one
+44px circle — with a flex container built for a row of icons holding exactly one.
+The read of "sparse and unfinished" is accurate, and it is worse than it looks in
+markup, because the heading that would explain the band renders to nothing.
+
+SHOULD IT BE ITS OWN SECTION? No.
+One link does not earn a full-width band, 64px of padding and a section heading,
+and it will not earn them at three links either. More decisively: the footer
+already carries the address, phone, email and Sunday Mass times — it is already
+the "reach us" component. A separate social band immediately above it splits one
+idea across two blocks and adds a tonal stripe between the contact section and
+the footer for no structural reason. Folding social into the footer removes
+172px, removes a band, removes a heading, and puts the icons where people look
+for them.
+
+RECOMMENDED — Option A: a social row inside the footer
+  Put the icon row in the footer as a labelled row, not a section.
+    - Keep each target 44x44 with a 12-16px gap (the existing `.social-bar` flex
+      with gap:16px already does this — reuse it verbatim).
+    - Replace the invisible h2 with a visible 13.12px uppercase label in the
+      existing eyebrow style ("FOLLOW THE PARISH"), matching ADDRESS / SUNDAY
+      MASS / PHONE in the contact block, so it inherits a pattern already on the
+      page instead of introducing one.
+    - Place it directly above or beside the existing footer contact line and let
+      it sit on the footer's navy — gold-on-navy at 44px is already the
+      established icon treatment in the contact block.
+    - Net effect on the hub: 172px shorter, one fewer band, one fewer heading.
+
+  Option B (only if the parish wants social to be a real destination)
+  Keep a section, but give it enough to justify itself: a visible heading, a
+  one-line invitation, the icon row, and the Instagram handle as text
+  ("@cclblekki") so the account is identifiable without tapping. Do not ship a
+  band with fewer than three links.
+
+  Option C — not recommended
+  Leave it as a section and add placeholder icons for accounts that do not exist.
+  Dead links read worse than one honest link.
+
+APPLYING IT CONSISTENTLY TO THE OTHER THREE
+  give already contains the exact scaffold, switched off: a
+  `section.section--band` with the heading "Stay connected", the line "Worship
+  with us, follow along, and join parish life." and an empty `.hub-grid`, all
+  under `display:none` (finding G-12). Two options, and they should not be mixed:
+    - If Option A is chosen: delete that hidden section and put the icon row in
+      the shared footer. All four sites inherit it at once, because the footer is
+      already near-identical across them (3.8).
+    - If Option B is chosen: the hidden give section becomes the template and the
+      hub's `#social` should be rebuilt to match it, not the other way round.
+  Either way, one component, defined once, used on all four — since none of
+  give / harvest / join currently has any social link at all, and only the hub
+  links to Instagram.
+
+WHICH ACCOUNTS
+  Only one is evidenced: instagram.com/cclblekki/. WhatsApp appears on give as a
+  wa.me link used for gift confirmation, which is a transactional use rather than
+  a "follow us" channel — worth deciding deliberately whether it belongs in a
+  social row. Do not add Facebook / YouTube / X placeholders unless those
+  accounts exist.
+
+
+================================================================================
+5. THE PHOTO CAROUSEL — DOES IT EARN ITS POSITION ON A PHONE?
+================================================================================
+
+MEASURED (hub at 375)
+  section#gallery: y1090-1471, 381px tall — screen 2 of 5
+  heading "Parish Photo Gallery": visually-hidden, so the strip is unlabelled
+  slides: 2
+  image: rendered 343x193 (16:9), natural 800x450, from images.unsplash.com
+         slide 1 eager, slide 2 lazy
+  controls, below the image, centred:
+    "Previous slide" 44x44 (y1363)  ✓
+    dots 14x14, 12px apart (y1378)  ✗ (finding H-1)
+    "Next slide" 44x44 (y1363)      ✓
+  no captions; alt text "Parishioners gathered in worship" / "A community
+  gathering"
+
+VERDICT — no, not in its current form.
+Three separate problems, in order of severity:
+
+  1. The content is not the parish. Both slides are Unsplash stock. The visible
+     first slide shows a social gathering under string lights and is described in
+     alt text as parishioners in worship. A gallery of stock strangers on a
+     parish homepage costs trust, and it is the one thing here that no amount of
+     layout work fixes. Two real photographs would outperform this immediately.
+  2. Two slides do not need a carousel. A 2-item carousel adds arrows, dots,
+     an interaction model and a hidden second slide in order to show one more
+     photograph than a static image would. Two images side by side, or one
+     full-bleed image, delivers the same content with no controls, no hidden
+     state and no 14px dots to miss.
+  3. At 193px tall and inset to 343px, it is a small window on a device that
+     could give it the full width. If photography stays, take it edge-to-edge:
+     drop the side padding, let the image run 375px wide, and raise it to a 4:3
+     or 3:2 crop. That is also the one place on these four sites where the
+     "edge-to-edge imagery" direction is available and unused.
+
+RECOMMENDATION
+  Replace with a single full-bleed real photograph plus a visible heading, and
+  reclaim the 381px. If a gallery is genuinely wanted later, reintroduce it once
+  there are 6+ real parish photographs — and at that point make it a swipeable
+  scroll-snap strip with no dots, which is the pattern phone users already expect
+  and which removes the 14px-target problem entirely.
+  Given the hub's ordering (H-9), the stronger move is to put Mass times in this
+  slot on screen 2 and move photography below the fold.
+
+
+================================================================================
+6. TYPOGRAPHY AND READABILITY AT 375px
+================================================================================
+  Fonts render as specified everywhere: Spectral (600) for headings, Public Sans
+  for body. Confirmed loaded, not falling back.
+
+  LINE LENGTH at 375 — good on three sites, broken on one.
+    hub 39 characters max (343px columns) · give 43 · harvest 43 · join 43
+    …except join's privacy notice at 20-22 characters (finding J-1). Everything
+    else sits comfortably under 45.
+
+  LINE LENGTH at 768 — too long on three sites.
+    give 85 · harvest 85 · join 85 characters (columns of 512-736px).
+    Cap the measure at ~65-70 characters rather than letting it track the
+    container.
+
+  HEADING SCALE at 375.
+    hub      h1 32 / h2 27.2 / h3 21.06  — ratios 1.18, 1.29. Workable.
+    give     h1 36.8 / h2 27.2 / h3 18.4-25.6 — h3 overlaps h2.
+    harvest  h1 32 / h2 24 / h3 19.2 — workable.
+    join     h1 32 / h2 17.6 / body 18.4 — h2 below body size. Broken.
+    The hub's h1 at 32px against a 27.2px h2 is only a 1.18x step; for the
+    confident hierarchy the brief asks for, widen the top step (h1 ~36-40px at
+    375) and keep h2 at 27.2px.
+
+  SMALL TEXT. 13.12-13.6px is used for uppercase eyebrow and field labels
+  (FAITH · COMMUNITY · SERVICE, ADDRESS, SUNDAY MASS, ACCOUNT NAME, BANK,
+  ACCOUNT NUMBER). That is a legitimate label role, not body copy — body copy is
+  18px. One to watch rather than fix: give carries an 11.52px "THIS SEASON"
+  label, which is small enough to be worth raising to the 13.12px label size.
+  Body copy at 18px needs no zoom at 375 on any of the four.
+
+  LINE HEIGHT is consistently 1.15 on headings and 1.4-1.65 on body. Consistent
+  and appropriate; no change needed.
+
+
+================================================================================
+7. PRIORITISED — TOP 10 CHANGES, PHONE EXPERIENCE FIRST
+================================================================================
+
+ 1. Fix the join privacy-notice squeeze (J-1). 175px column, 20-22 characters per
+    line, 608px tall. Unstack the nested 24+32+24px paddings at small widths and
+    move the icon above the text. Worst readability defect measured.
+
+ 2. Put the join registration form above the privacy notice (J-12). The form
+    currently starts at y1248 on a page whose only purpose is registration. Move
+    the notice next to the submit action or behind a disclosure.
+
+ 3. Fix the four repeated tap targets as shared components (3.9). Topbar brand
+    40→44px; contact phone/email 20→44px by wrapping the icon and text in the
+    anchor; footer email 17→44px; carousel dots 14→44px with ≥12px gaps. One
+    change each, four sites benefit.
+
+ 4. Add the join card to the hub (H-8). The registration site is currently
+    unreachable from the landing page — the whole funnel is invisible.
+
+ 5. Reserve space for both Tally embeds (V-1, J-2). height="500"/"520" expanding
+    to ~1346px is an 846px shift that lands late on mobile data. Set a min-height
+    near the expected size.
+
+ 6. Raise the mobile content width (3.10). Give inputs 261px, join form 261px,
+    harvest form 293px inside a 327px card in a 375px viewport. One padding scale
+    recovers 60-70px of width for every form field on every site.
+
+ 7. Move the social row into the footer and delete the band (section 4). Removes
+    172px, a tonal stripe, an invisible heading and a lone floating icon, and
+    gives all four sites the same treatment — including the three that have none.
+
+ 8. Replace the stock carousel with one real full-bleed photograph, and give the
+    section a visible heading (section 5, H-5, H-10). Recovers ~380px on screen 2
+    and removes the stock-imagery credibility problem.
+
+ 9. Unify the type ramp and the button style (3.1, 3.2, 3.3). One h1/h2/h3 scale
+    with shared breakpoints — resolving give's 56px h1, join's 17.6px h2 and the
+    hub's frozen 21.06px h3 — plus one pill radius and height to replace give's
+    eight variants. Cap the measure at ~65-70 characters at 768 to fix the 85s.
+
+10. Give the hub a topbar and reorder it (H-4, H-9, H-12). Add the shared header
+    so the landing page has persistent brand and navigation, then lift Mass times
+    out of the contact section at y2700 into screen 2, and shorten the 1221px
+    "Sacrament and Church Life" band.
+
+Items 1-6 are the phone-experience fixes and are mostly small, local changes.
+Items 7-10 are the design-system and hierarchy work that keeps the four sites
+from drifting apart again.
+
+================================================================================
+APPENDIX A — DEVTOOLS HARNESS: REPRODUCE AND RE-CHECK ANY FINDING
+================================================================================
+
+Every measurement in this review came from the harness below. It is included so
+the findings can be re-run after each fix rather than taken on trust, and so any
+number here can be independently checked.
+
+Browser window resizing does NOT work for this: on the machine this review was
+produced on, the tab's render surface was fixed, so resizing never changed the
+layout viewport and no mobile media query ever fired. The harness re-renders the
+page from its own origin into a same-origin frame of an exact width instead.
+
+--------------------------------------------------------------------------------
+HOW TO USE
+--------------------------------------------------------------------------------
+  1. Open the site you want to test — the harness must run on that site's own
+     origin. To test give., be on give.cclbparish.com; it will not work from the
+     hub, because the sites are cross-origin to each other and all four send
+     `Content-Security-Policy: frame-ancestors 'none'` plus
+     `X-Frame-Options: DENY` (which is correct and should stay).
+  2. Open DevTools → Console and paste the whole snippet once.
+  3. Then:
+
+       await CCLB.view(375)      // render at an exact 375px layout viewport
+       CCLB.audit()              // print every check as console tables
+       CCLB.to('#social')        // scroll the frame to a section, then screenshot
+       CCLB.off()                // remove the harness, restore the page
+
+     Other widths and a zoom factor for screenshotting:
+
+       await CCLB.view(768, 1024)
+       await CCLB.view(1280, 800)
+       await CCLB.view(375, 812, 1.5)   // 1.5x visual zoom; layout stays 375px
+
+     `zoom` is a CSS transform. It scales what you see for a legible screenshot
+     and does NOT change the layout viewport, the media queries or `vw`.
+
+--------------------------------------------------------------------------------
+WHAT audit() REPORTS
+--------------------------------------------------------------------------------
+  overflowX    'none', or the elements crossing the viewport edge
+  tapTargets   every interactive element under 44x44px, with its size, its y
+               position and the distance to its nearest interactive neighbour
+  headings     h1-h4 with computed size, line-height and font, and a
+               `hiddenFromSighted` flag for visually-hidden headings
+  measure      paragraphs and list items whose line length falls outside
+               45-75 characters, with the column width that caused it
+  sections     top-level section offsets and heights, for vertical budgeting
+  aboveFold    everything intersecting the first screen, with its y range
+
+--------------------------------------------------------------------------------
+THREE THINGS TO KNOW BEFORE TRUSTING A NUMBER
+--------------------------------------------------------------------------------
+  1. Third-party embeds do not load in the harness. The Tally forms on harvest
+     and join render as an empty box. That is the harness, NOT a site defect —
+     both forms load correctly on the live pages. It also means page heights for
+     those two sites are measured with the form at its declared height attribute
+     (500 / 520px) and are shorter than reality. Verify anything form-related on
+     the live page.
+
+  2. The scrollbar must stay suppressed. The snippet injects
+     `scrollbar-width:none` into the frame so that the layout viewport AND the
+     `vw` unit both equal the requested width exactly. Without it, a desktop
+     scrollbar makes `vw` resolve against the frame's outer width and every
+     clamp()/vw-based font size reads too large — 2.8% too large at 831px and
+     6.1% at 375px. `view()` warns if the layout viewport does not match what
+     you asked for; if it warns, the type sizes are not trustworthy.
+
+  3. Gradient and image backgrounds defeat automated contrast checks. A computed
+     `background-color` of `rgba(0,0,0,0)` over a gradient reads as white and
+     produces false failures — give's hero h1 reports 1.03:1 when it is in fact
+     white on a dark navy gradient and perfectly legible. audit() deliberately
+     does not report contrast for that reason. Check contrast by eye, or sample
+     the rendered pixels.
+
+--------------------------------------------------------------------------------
+VALIDATION — WHY THIS CAN BE TRUSTED
+--------------------------------------------------------------------------------
+  Rendered at a layout viewport matching the real page (831px), the harness
+  reproduced the live page exactly:
+
+      h1 41.55px · h2 36px · body 13.6px · document height 3255px · card 324px
+
+  Identical on every metric. The harness was then re-run against the hub at
+  375px as a final check and returned precisely the findings recorded above:
+  the five sub-44px tap targets (14x14 dots at 12px spacing, 156x20 tel,
+  155x20 mailto, 162x21 footer email), no horizontal overflow, both
+  visually-hidden headings ("Parish Photo Gallery", "Connect with Us"), and the
+  section heights hero 428 / hub 662 / gallery 381 / church-life 1221 /
+  contact 765 / social 172 / footer 410.
+
+--------------------------------------------------------------------------------
+THE SNIPPET
+--------------------------------------------------------------------------------
+(() => {
+  const ID = 'cclb-probe';
+  const W = window, D = document;
+  const S = { html: null, hidden: null, frame: null, bodyStyle: '' };
+
+  const build = (html, base) => html.replace(/<head([^>]*)>/i,
+    `<head$1><base href="${base}">` +
+    `<style id="cclb-fix">html{scrollbar-width:none!important;scroll-behavior:auto!important}` +
+    `html::-webkit-scrollbar,body::-webkit-scrollbar{width:0!important;height:0!important;display:none!important}</style>`);
+
+  const CCLB = {
+    async view(width = 375, height = 812, zoom = 1) {
+      if (!S.hidden) {
+        S.hidden = [...D.body.children];
+        S.bodyStyle = D.body.getAttribute('style') || '';
+      }
+      S.hidden.forEach(el => { if (el.id !== ID) el.style.display = 'none'; });
+      D.documentElement.style.background = '#fff';
+      D.body.style.cssText = 'margin:0;padding:0;background:#fff;overflow:hidden';
+      D.querySelectorAll('#' + ID).forEach(el => el.remove());
+
+      if (!S.html) S.html = await (await fetch(location.pathname, { cache: 'reload' })).text();
+
+      const f = D.createElement('iframe');
+      f.id = ID;
+      f.setAttribute('srcdoc', build(S.html, location.origin + '/'));
+      f.style.cssText = `position:fixed;left:0;top:0;width:${width}px;height:${height}px;`
+        + `border:0;background:#fff;z-index:2147483647;transform-origin:0 0;transform:scale(${zoom})`;
+      D.body.appendChild(f);
+      await new Promise(r => setTimeout(r, 5200));
+
+      S.frame = f;
+      const d = f.contentDocument;
+      const real = d.documentElement.clientWidth;
+      if (real !== width) {
+        console.warn(`[cclb] layout viewport is ${real}px, expected ${width}px — `
+          + `vw-based type will read ${(width / real * 100 - 100).toFixed(1)}% off`);
+      }
+      console.log(`[cclb] viewport ${real}x${f.contentWindow.innerHeight}`
+        + ` · document ${d.documentElement.scrollHeight}px`
+        + ` · ${(d.documentElement.scrollHeight / height).toFixed(1)} screens`);
+      return CCLB;
+    },
+
+    to(selector) {
+      const d = S.frame.contentDocument;
+      const t = d.querySelector(selector);
+      if (!t) return console.warn('[cclb] no match for ' + selector);
+      d.documentElement.style.scrollBehavior = 'auto';
+      t.scrollIntoView({ block: 'start' });
+      return CCLB;
+    },
+
+    audit() {
+      const f = S.frame, w = f.contentWindow, d = f.contentDocument;
+      const vw = d.documentElement.clientWidth, vh = w.innerHeight;
+      const cs = el => w.getComputedStyle(el);
+      const txt = el => (el.innerText || '').replace(/\s+/g, ' ').trim();
+      const out = {};
+
+      out.overflowX = d.documentElement.scrollWidth > vw + 1
+        ? [...d.querySelectorAll('*')].filter(el => {
+            const b = el.getBoundingClientRect();
+            return b.width > 2 && (b.right + w.scrollX > vw + 1 || b.left + w.scrollX < -1);
+          }).slice(0, 10).map(el => `${el.tagName.toLowerCase()}.${String(el.className).split(' ')[0]}`)
+        : 'none';
+
+      const sel = 'a,button,input,select,textarea,summary,[role="button"]';
+      const hits = [...d.querySelectorAll(sel)].filter(el => {
+        const c = cs(el), b = el.getBoundingClientRect();
+        return c.display !== 'none' && c.visibility !== 'hidden'
+          && +c.opacity > 0.05 && b.width > 1 && b.height > 1;
+      }).map(el => {
+        const b = el.getBoundingClientRect();
+        return {
+          label: (el.getAttribute('aria-label') || txt(el) || el.value || '').slice(0, 30),
+          w: Math.round(b.width), h: Math.round(b.height),
+          x: Math.round(b.x), y: Math.round(b.y + w.scrollY),
+        };
+      });
+      hits.forEach((a, i) => {
+        let g = Infinity;
+        hits.forEach((b, j) => {
+          if (i === j) return;
+          const dx = Math.max(0, a.x - (b.x + b.w), b.x - (a.x + a.w));
+          const dy = Math.max(0, a.y - (b.y + b.h), b.y - (a.y + a.h));
+          g = Math.min(g, Math.hypot(dx, dy));
+        });
+        a.gap = Math.round(g);
+      });
+      out.tapTargets = hits
+        .filter(a => (a.w < 44 || a.h < 44) && !(a.w <= 1 && a.h <= 1))
+        .map(a => ({ label: a.label, size: `${a.w}x${a.h}`, y: a.y, gapToNeighbour: a.gap }));
+
+      out.headings = [...d.querySelectorAll('h1,h2,h3,h4')].map(el => {
+        const c = cs(el);
+        const hidden = /visually-hidden|sr-only/.test(
+          String(el.className) + String(el.parentElement && el.parentElement.className));
+        return {
+          tag: el.tagName.toLowerCase(), size: c.fontSize, lineHeight: c.lineHeight,
+          font: c.fontFamily.split(',')[0].replace(/"/g, ''),
+          text: txt(el).slice(0, 34), hiddenFromSighted: hidden || undefined,
+        };
+      });
+
+      out.measure = [...d.querySelectorAll('p,li')].map(el => {
+        const t = txt(el), b = el.getBoundingClientRect(), c = cs(el);
+        if (!t || b.width < 2) return null;
+        const lines = Math.max(1, Math.round(b.height / (parseFloat(c.lineHeight) || 24)));
+        return {
+          size: c.fontSize, colWidth: Math.round(b.width),
+          charsPerLine: Math.round(t.length / lines), text: t.slice(0, 26),
+        };
+      }).filter(Boolean).filter(r => r.charsPerLine < 45 || r.charsPerLine > 75);
+
+      out.sections = [...d.querySelectorAll('main>*,body>header,body>footer,body>section')]
+        .map(el => {
+          const b = el.getBoundingClientRect();
+          if (b.height < 4) return null;
+          const h = el.querySelector('h1,h2,h3');
+          return {
+            id: el.id || String(el.className).split(' ')[0],
+            y: Math.round(b.y + w.scrollY), height: Math.round(b.height),
+            heading: h ? txt(h).slice(0, 28) : '',
+          };
+        }).filter(Boolean);
+
+      out.aboveFold = [...d.querySelectorAll('body *')].filter(el => {
+        const b = el.getBoundingClientRect();
+        if (b.top >= vh || b.bottom <= 0 || b.width < 2) return false;
+        const own = [...el.childNodes].filter(n => n.nodeType === 3)
+          .map(n => n.textContent.trim()).join('').trim();
+        return own.length > 0 || ['IMG', 'BUTTON'].includes(el.tagName);
+      }).map(el => {
+        const b = el.getBoundingClientRect();
+        return `${el.tagName.toLowerCase()} @${Math.round(b.top)}-${Math.round(b.bottom)}`
+          + ` "${(txt(el) || el.alt || '').slice(0, 34)}"`;
+      });
+
+      console.log('%c- horizontal overflow -', 'font-weight:bold');
+      console.log(out.overflowX);
+      console.log('%c- tap targets under 44px -', 'font-weight:bold');
+      console.table(out.tapTargets);
+      console.log('%c- heading scale -', 'font-weight:bold');
+      console.table(out.headings);
+      console.log('%c- line length outside 45-75 chars -', 'font-weight:bold');
+      console.table(out.measure);
+      console.log('%c- section heights -', 'font-weight:bold');
+      console.table(out.sections);
+      console.log('%c- above the fold -', 'font-weight:bold');
+      console.log(out.aboveFold);
+      return out;
+    },
+
+    off() {
+      D.querySelectorAll('#' + ID).forEach(el => el.remove());
+      if (S.hidden) S.hidden.forEach(el => { el.style.display = ''; });
+      D.body.setAttribute('style', S.bodyStyle || '');
+      D.documentElement.style.background = '';
+      S.frame = null;
+      console.log('[cclb] harness removed');
+    },
+  };
+
+  W.CCLB = CCLB;
+  console.log('[cclb] ready - await CCLB.view(375) then CCLB.audit()');
+})();
+
+--------------------------------------------------------------------------------
+SUGGESTED REGRESSION PASS AFTER EACH FIX
+--------------------------------------------------------------------------------
+  On each of the four origins, at 375 / 768 / 1280:
+
+      await CCLB.view(375); CCLB.audit()
+
+  The four checks worth holding to a standard:
+    - overflowX stays 'none'
+    - tapTargets is empty, except for intentional 1x1 skip-links
+    - measure is empty (all line lengths land in 45-75 characters) — this is the
+      check that catches both the join notice at 20-22 and the 85s at 768
+    - headings shows one consistent ramp per breakpoint, with no
+      hiddenFromSighted flag on a section that visually needs a title
+
+  Item 1 in the priority list (the join privacy notice) is verified when
+  `measure` no longer reports the two 175px-wide paragraphs at 375px.
+
+================================================================================
+END
+================================================================================
