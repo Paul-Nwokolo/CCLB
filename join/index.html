@@ -84,11 +84,10 @@
                  background:linear-gradient(90deg,var(--gold),var(--gold-soft)); }
 
   /* ---- consent / privacy notice ---- */
-  .notice{ display:flex; gap:.7rem; align-items:flex-start; background:var(--mist);
-           border-left:4px solid var(--gold); border-radius:0 var(--r) var(--r) 0;
-           padding:var(--s4); margin-bottom:var(--s5); font-size:1rem; color:var(--ink); }
+  .notice{ display:flex; flex-direction:column; gap:.7rem; align-items:flex-start; background:var(--mist); border-left:4px solid var(--gold); border-radius:0 var(--r) var(--r) 0; padding:var(--s3); margin-top:var(--s5); margin-bottom:0; font-size:1rem; color:var(--ink); }
+  @media (min-width: 600px) { .notice { flex-direction:row; padding:var(--s4); } }
   .notice svg{ flex:none; margin-top:3px; }
-  .notice h2{ font-size:1.1rem; margin-bottom:.35rem; }
+  .notice h2{ font-size:1.25rem; margin-bottom:.35rem; }
   .notice p{ margin:0 0 .5rem; }
   .notice p:last-child{ margin-bottom:0; }
   .notice a{ font-weight:600; }
@@ -143,21 +142,9 @@
   <div class="wrap">
     <div class="card">
 
-      <!-- NDPA 2023 consent / privacy notice — shown ABOVE the form -->
-      <div class="notice" role="note">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1C4E78" stroke-width="2" aria-hidden="true">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>
-        </svg>
-        <div>
-          <h2>How we use your information</h2>
-          <p>The <strong>Catholic Church of the Lord's Baptism</strong> collects the details below only to maintain our parish register and to contact you about parish life. They are stored securely in our parish records and are never sold or shared outside the parish.</p>
-          <p>By submitting this form you consent to the parish holding and using these details for those purposes. You can ask to view, correct, or delete your information at any time by contacting the church.</p>
-        </div>
-      </div>
-
       <!-- ===== Tally standard embed =====
            EDIT #2: replace TALLY_FORM_ID (both places) with your form's ID
-           (from Tally → Share → Embed → "Standard"). Keep the query string —
+           (from Tally ? Share ? Embed ? "Standard"). Keep the query string �
            it hides Tally's own title, makes the background transparent so it
            blends with this white card, and lets the iframe resize to fit. -->
       <div class="form-embed">
@@ -170,6 +157,18 @@
           <p class="embed-fallback">Please enable JavaScript to load the registration form, or
           <a href="https://tally.so/r/A7Q55N">open the form in a new tab</a>.</p>
         </noscript>
+      </div>
+
+      <!-- NDPA 2023 consent / privacy notice � shown BELOW the form -->
+      <div class="notice" role="note">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1C4E78" stroke-width="2" aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>
+        </svg>
+        <div>
+          <h2>How we use your information</h2>
+          <p>The <strong>Catholic Church of the Lord's Baptism</strong> collects the details below only to maintain our parish register and to contact you about parish life. They are stored securely in our parish records and are never sold or shared outside the parish.</p>
+          <p>By submitting this form you consent to the parish holding and using these details for those purposes. You can ask to view, correct, or delete your information at any time by contacting the church.</p>
+        </div>
       </div>
 
     </div>
@@ -208,6 +207,10 @@
 </script>
 </body>
 </html>
+
+
+
+
 
 
 
