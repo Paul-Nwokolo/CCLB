@@ -62,8 +62,8 @@
   p{ margin:0 0 var(--s3); }
   a{ color:var(--brand-700); }
 
-  .wrap{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:var(--s4); }
-  .section{ padding-block:var(--s7); }
+  
+  
   .section--band{ background:var(--mist); }
 
   /* ---- Accessibility helpers ---- */
@@ -135,7 +135,7 @@
   .chip .dot{ color:var(--gold); margin-right:.4rem; font-weight:700; }
   .chip-tag{ font-size:.72rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--brand-900); background:var(--gold-soft); border-radius:var(--r-pill); padding:.1rem .5rem; margin-left:.5rem; vertical-align:middle; }
 
-  .card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); box-shadow:var(--shadow); padding:var(--s5); position:relative; overflow:hidden; }
+  
   .card::before{ content:""; position:absolute; inset:0 0 auto 0; height:5px; background:linear-gradient(90deg,var(--gold),var(--gold-soft)); }
   .fund-name{ font-size:1.6rem; margin-bottom:.2rem; }
   .fund-blurb{ color:var(--ink-soft); margin-bottom:var(--s4); }
@@ -617,17 +617,28 @@
       mail:  '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>'
     };
     const contactItems = [
-      c.address     && { label: "Address",         value: `<a href="${esc(c.mapUrl)}" target="_blank" rel="noopener noreferrer">${esc(c.address)}</a>`, ic: I.pin },
-      c.sundayMass  && { label: "Sunday Mass",      value: `<span>${esc(c.sundayMass)}</span>`,  ic: I.clock },
-      c.weekdayMass && { label: "Weekday Mass",     value: `<span>${esc(c.weekdayMass)}</span>`, ic: I.cal },
-      c.confession  && { label: "Confession",       value: `<span>${esc(c.confession)}</span>`,  ic: I.cross },
-      c.officeHours && { label: "Office Hours",     value: `<span>${esc(c.officeHours)}</span>`, ic: I.user },
-      c.phone       && { label: "Phone",            value: `<a href="tel:${esc(c.phone.replace(/[^\d+]/g,''))}">${esc(c.phone)}</a>`, ic: I.phone },
-      c.email       && { label: "Email",            value: `<a href="mailto:${esc(c.email)}">${esc(c.email)}</a>`, ic: I.mail }
+      c.address     && { label: "Address",         text: c.address, href: c.mapUrl, target: "_blank", rel: "noopener noreferrer", ic: I.pin },
+      c.sundayMass  && { label: "Sunday Mass",      text: c.sundayMass,  ic: I.clock },
+      c.weekdayMass && { label: "Weekday Mass",     text: c.weekdayMass, ic: I.cal },
+      c.confession  && { label: "Confession",       text: c.confession,  ic: I.cross },
+      c.officeHours && { label: "Office Hours",     text: c.officeHours, ic: I.user },
+      c.phone       && { label: "Phone",            text: c.phone, href: `tel:${c.phone.replace(/[^\d+]/g,'')}`, ic: I.phone },
+      c.email       && { label: "Email",            text: c.email, href: `mailto:${c.email}`, ic: I.mail }
     ].filter(Boolean);
 
     const cg = $("#contact-grid");
-    contactItems.forEach(it => cg.appendChild(el("div", { className: "contact-item" }, `${icon(it.ic)}<div><div class="ct-label">${esc(it.label)}</div>${it.value}</div>`)));
+    contactItems.forEach(it => {
+      const inner = `${icon(it.ic)}<div><div class="ct-label">${esc(it.label)}</div><span>${esc(it.text)}</span></div>`;
+      if (it.href) {
+        const a = el("a", { className: "contact-item", href: it.href });
+        if (it.target) a.target = it.target;
+        if (it.rel) a.rel = it.rel;
+        a.innerHTML = inner;
+        cg.appendChild(a);
+      } else {
+        cg.appendChild(el("div", { className: "contact-item" }, inner));
+      }
+    });
     const yrEl = document.getElementById("yr"); if (yrEl) yrEl.textContent = new Date().getFullYear();
 
     /* hub (optional) */
@@ -649,4 +660,6 @@
 </script>
 </body>
 </html>
+
+
 

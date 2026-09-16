@@ -15,9 +15,10 @@ test.describe('Accessibility Scans', () => {
     test(`should pass axe-core scan on ${route}`, async ({ page }) => {
       await page.goto(route);
       
-      const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
+      const accessibilityScanResults = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice']).analyze();
       
       expect(accessibilityScanResults.violations).toEqual([]);
     });
   }
 });
+

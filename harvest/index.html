@@ -55,7 +55,7 @@
   h1,h2,h3{ font-family:var(--font-head); line-height:1.15; margin:0; color:var(--ink); font-weight:600; }
   p{ margin:0 0 var(--s3); }
   img{ max-width:100%; display:block; }
-  .wrap{ width:min(100% - 2rem, var(--maxw)); margin-inline:auto; }
+  
   .crest{
     display:inline-block; width:40px; height:40px; vertical-align:middle;
     background:var(--logo-url) center/contain no-repeat;
@@ -317,4 +317,7 @@
   </script>
 <div class="flyer-lightbox" id="flyerLightbox" aria-hidden="true"><button class="flyer-close" type="button" aria-label="Close">&times;</button><img id="flyerLightboxImg" src="" alt="Flyer full view" decoding="async" /></div><script>(function(){var box=document.getElementById('flyerLightbox');var boxImg=document.getElementById('flyerLightboxImg');function openBox(src,alt){boxImg.src=src;boxImg.alt=alt||'Flyer full view';box.classList.add('open');box.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}function closeBox(){box.classList.remove('open');box.setAttribute('aria-hidden','true');boxImg.src='';document.body.style.overflow='';}document.querySelectorAll('.theme-media').forEach(function(m){var img=m.querySelector('img');if(!img)return;m.addEventListener('click',function(){openBox(img.currentSrc||img.src,img.alt);});m.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openBox(img.currentSrc||img.src,img.alt);}});});box.addEventListener('click',function(e){if(e.target===box||e.target.classList.contains('flyer-close'))closeBox();});document.addEventListener('keydown',function(e){if(e.key==='Escape')closeBox();});})();</script></body>
 </html>
+
+
+
 
