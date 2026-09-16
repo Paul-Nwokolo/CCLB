@@ -118,3 +118,13 @@ a { color: var(--brand-700); }
   * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
 
+
+/* ---- Social Bar ---- */
+.social-bar { display: flex; justify-content: center; gap: var(--s3); list-style: none; padding: 0; margin: var(--s4) 0 0; }
+.social-bar a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: var(--r-pill); background: transparent; border: 2px solid var(--gold); color: var(--gold); text-decoration: none; transition: background-color 0.2s, color 0.2s; }
+.social-bar a:hover, .social-bar a:focus { background: rgba(201, 162, 75, 0.1); color: var(--gold-soft); }
+.social-bar svg { width: 24px; height: 24px; }
+
+
+.footer-eyebrow { font-size: .82rem; text-transform: uppercase; letter-spacing: .05em; color: #aac2dc; font-weight: 700; margin: var(--s5) 0 var(--s3); }
+
