@@ -148,9 +148,7 @@
           <h2 id="gallery-title">Parish Photo Gallery</h2>
         </div>
       </div>
-      <div class="full-bleed-photo">
-        <img id="featured-photo" src="" alt="" loading="lazy">
-      </div>
+      <div id="gallery-container"></div>
     </section>
 
     <!-- ===================== SACRAMENT & CHURCH LIFE ===================== -->
@@ -228,21 +226,156 @@ document.addEventListener('DOMContentLoaded', async () => {
   const yrEl = document.getElementById('yr');
   if (yrEl) yrEl.textContent = new Date().getFullYear();
 
-  const photo = document.getElementById('featured-photo');
-  if (!photo) return;
+  const container = document.getElementById('gallery-container');
+  if (!container) return;
 
   try {
     const res = await fetch('data/gallery.json');
     if (res.ok) {
       const data = await res.json();
-      const items = data.items || [];
-      const firstImg = items.find(i => i.image);
-      if (firstImg) {
-        photo.src = firstImg.image;
-        photo.alt = firstImg.alt || 'Parish photo';
-      } else {
-        photo.parentElement.style.display = 'none';
+      const items = (data.items || []).filter(i => i.image);
+      
+      if (items.length === 0) {
+        container.style.display = 'none';
+        return;
       }
+
+      if (items.length === 1) {
+        const wrap = document.createElement('div');
+        wrap.className = 'full-bleed-photo';
+        const img = document.createElement('img');
+        img.src = items[0].image;
+        img.alt = items[0].alt || '';
+        img.loading = 'lazy';
+        wrap.appendChild(img);
+        container.appendChild(wrap);
+        return;
+      }
+
+      container.innerHTML = `
+        <div class="carousel" aria-roledescription="carousel" aria-label="Parish Photo Gallery" tabindex="0">
+          <div aria-live="polite" class="visually-hidden" id="carousel-announcer">Slide 1 of ${items.length}</div>
+          <div class="carousel__track-wrap">
+            <ul class="carousel__track"></ul>
+          </div>
+          <div class="carousel__controls">
+            <button class="carousel__btn carousel__btn--prev" aria-label="Previous slide">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <div class="carousel__nav"></div>
+            <button class="carousel__btn carousel__btn--next" aria-label="Next slide">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+      `;
+
+      const track = container.querySelector('.carousel__track');
+      const dotsNav = container.querySelector('.carousel__nav');
+      
+      items.forEach((item, index) => {
+        const slide = document.createElement('li');
+        slide.className = 'carousel__slide';
+        slide.setAttribute('aria-roledescription', 'slide');
+        slide.setAttribute('aria-label', `${index + 1} of ${items.length}`);
+        
+        const img = document.createElement('img');
+        img.src = item.image;
+        img.alt = item.alt || '';
+        img.loading = index === 0 ? 'eager' : 'lazy';
+        slide.appendChild(img);
+        track.appendChild(slide);
+
+        const dot = document.createElement('button');
+        dot.className = `carousel__dot ${index === 0 ? 'current-dot' : ''}`;
+        dot.setAttribute('aria-label', `Slide ${index + 1}`);
+        dotsNav.appendChild(dot);
+      });
+
+      const slides = Array.from(track.children);
+      const nextButton = container.querySelector('.carousel__btn--next');
+      const prevButton = container.querySelector('.carousel__btn--prev');
+      const dots = Array.from(dotsNav.children);
+      const announcer = document.getElementById('carousel-announcer');
+      const carouselEl = container.querySelector('.carousel');
+      
+      let currentIndex = 0;
+      let autoplayInterval = null;
+      let isHovered = false;
+      let isFocused = false;
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function updateSlide(index) {
+        track.style.transform = `translateX(-${index * 100}%)`;
+        
+        slides.forEach((slide, i) => {
+          if (i === index) {
+            slide.removeAttribute('aria-hidden');
+            dots[i].classList.add('current-dot');
+          } else {
+            slide.setAttribute('aria-hidden', 'true');
+            dots[i].classList.remove('current-dot');
+          }
+        });
+        
+        announcer.textContent = `Slide ${index + 1} of ${slides.length}`;
+        currentIndex = index;
+      }
+
+      updateSlide(0);
+
+      function nextSlide() {
+        updateSlide((currentIndex + 1) % slides.length);
+      }
+
+      function prevSlide() {
+        updateSlide((currentIndex - 1 + slides.length) % slides.length);
+      }
+
+      nextButton.addEventListener('click', () => { nextSlide(); resetAutoplay(); });
+      prevButton.addEventListener('click', () => { prevSlide(); resetAutoplay(); });
+      
+      dotsNav.addEventListener('click', e => {
+        const targetDot = e.target.closest('button');
+        if (!targetDot) return;
+        const targetIndex = dots.findIndex(d => d === targetDot);
+        if (targetIndex !== -1) {
+          updateSlide(targetIndex);
+          resetAutoplay();
+        }
+      });
+
+      carouselEl.addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft') { prevSlide(); resetAutoplay(); }
+        if (e.key === 'ArrowRight') { nextSlide(); resetAutoplay(); }
+      });
+
+      carouselEl.addEventListener('mouseenter', () => { isHovered = true; stopAutoplay(); });
+      carouselEl.addEventListener('mouseleave', () => { isHovered = false; startAutoplay(); });
+      carouselEl.addEventListener('focusin', () => { isFocused = true; stopAutoplay(); });
+      carouselEl.addEventListener('focusout', () => { isFocused = false; startAutoplay(); });
+
+      function startAutoplay() {
+        if (prefersReducedMotion || isHovered || isFocused) return;
+        if (!autoplayInterval) {
+          autoplayInterval = setInterval(nextSlide, 5000);
+        }
+      }
+
+      function stopAutoplay() {
+        if (autoplayInterval) {
+          clearInterval(autoplayInterval);
+          autoplayInterval = null;
+        }
+      }
+
+      function resetAutoplay() {
+        stopAutoplay();
+        startAutoplay();
+      }
+
+      startAutoplay();
     }
   } catch (err) {
     console.error("Failed to load gallery data:", err);
