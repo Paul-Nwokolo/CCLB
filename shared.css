@@ -72,6 +72,14 @@ a { color: var(--brand-700); }
 /* ---- Top bar (Used by give, harvest, join) ---- */
 .topbar { position: sticky; top: 0; z-index: 30; background: rgba(251, 252, 254, .9); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
 .topbar .wrap { display: flex; align-items: center; justify-content: space-between; padding-block: .6rem; }
+.topbar-actions { display: flex; align-items: center; gap: .5rem; }
+.topbar-ig { flex: none; width: 44px; height: 44px; border-radius: var(--r-pill); display: grid; place-items: center; background: var(--brand-900); color: var(--gold); text-decoration: none; transition: background-color 0.12s; }
+.topbar-ig:hover, .topbar-ig:focus-visible { background: var(--brand-700); outline: 2px solid var(--gold); outline-offset: 2px; }
+.topbar-ig svg { width: 20px; height: 20px; }
+@media (max-width: 500px) {
+  .brand-mark .name { display: none; }
+  .topbar .btn { padding: .5rem .85rem; font-size: .95rem; }
+}
 .brand-mark { display: flex; align-items: center; gap: .6rem; text-decoration: none; color: var(--ink); }
 .brand-mark .crest { width: 44px; height: 44px; }
 .brand-mark .name { font-family: var(--font-head); font-weight: 600; font-size: 1.05rem; line-height: 1.1; }
@@ -119,14 +127,7 @@ a { color: var(--brand-700); }
 }
 
 
-/* ---- Social Bar ---- */
-.social-bar { display: flex; justify-content: center; gap: var(--s3); list-style: none; padding: 0; margin: var(--s4) 0 0; }
-.social-bar a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: var(--r-pill); background: transparent; border: 2px solid var(--gold); color: var(--gold); text-decoration: none; transition: background-color 0.2s, color 0.2s; }
-.social-bar a:hover, .social-bar a:focus { background: rgba(201, 162, 75, 0.1); color: var(--gold-soft); }
-.social-bar svg { width: 24px; height: 24px; }
 
-
-.footer-eyebrow { font-size: .82rem; text-transform: uppercase; letter-spacing: .05em; color: #aac2dc; font-weight: 700; margin: var(--s5) 0 var(--s3); }
 
 
 
