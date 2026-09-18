@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Harvest of God's Faithfulness — Catholic Church of the Lord's Baptism Lekki</title>
-  <meta name="description" content="Harvest of God's Faithfulness — Catholic Church of the Lord's Baptism, Osapa, Lekki." />
+  <title>Harvest of God's Faithfulness �” Catholic Church of the Lord's Baptism Lekki</title>
+  <meta name="description" content="Harvest of God's Faithfulness �” Catholic Church of the Lord's Baptism, Osapa, Lekki." />
   <meta name="theme-color" content="#102A43" />
 
-  <!-- Fonts: Spectral (dignified serif headings) + Public Sans (accessibility-first body) — unified across give / join / harvest -->
+  <!-- Fonts: Spectral (dignified serif headings) + Public Sans (accessibility-first body) �” unified across give / join / harvest -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
 
   <style>
   :root{
-    /* Typography — unified across give / join / harvest */
+    /* Typography �” unified across give / join / harvest */
     --font-head:"Spectral", Georgia, "Times New Roman", serif;
     --font-body:"Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
@@ -56,23 +56,13 @@
   p{ margin:0 0 var(--s3); }
   img{ max-width:100%; display:block; }
   
-  .crest{
-    display:inline-block; width:40px; height:40px; vertical-align:middle;
-    background:var(--logo-url) center/contain no-repeat;
-  }
 
-  /* Header */
-  .topbar{ background:var(--surface); border-bottom:1px solid var(--line); position:sticky; top:0; z-index:10; }
-  .topbar .wrap{ display:flex; align-items:center; justify-content:space-between; padding:var(--s2) 0; }
-  .brand-mark{ display:inline-flex; align-items:center; gap:var(--s2); text-decoration:none; color:var(--ink); }
-  .brand-mark .name{ font-family:var(--font-head); font-weight:600; font-size:1.15rem; }
-  .btn{
-    display:inline-block; border-radius:var(--r-pill); padding:.55rem 1.1rem; font-weight:600;
-    text-decoration:none; font-size:1rem; border:1px solid transparent; cursor:pointer;
-  }
-  .btn-ghost{ background:transparent; color:var(--brand-700); border-color:var(--line); }
 
-  /* Harvest account — mirrors the account layout/CSS on give.cclbparish.com */
+  /* harvest keeps a solid topbar �” not the translucent/blurred style the 
+     other three pages use */
+  .topbar { background: var(--surface); backdrop-filter: none; }
+
+  /* Harvest account �” mirrors the account layout/CSS on give.cclbparish.com */
   .acct-band{ padding:var(--s5) 0 var(--s6); }
   .acct-card{ background:var(--surface); border:1px solid var(--line); border-top:4px solid var(--gold);
     border-radius:var(--r-lg); box-shadow:var(--shadow); padding:var(--s5); max-width:42rem; margin-inline:auto; }
@@ -96,15 +86,7 @@
     box-shadow:var(--shadow-lift); opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; z-index:60; font-weight:600; }
   #toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
 
-  /* Hero */
-  .hero{ text-align:center; padding:var(--s7) 0 var(--s5); background:
-      radial-gradient(1200px 400px at 50% -10%, var(--mist), transparent 70%); }
-  .hero .eyebrow{
-    display:inline-block; font-family:var(--font-body); font-weight:600; letter-spacing:.08em;
-    text-transform:uppercase; font-size:.8rem; color:var(--brand-500); margin-bottom:var(--s2);
-  }
-  .hero h1{ font-size:clamp(2rem, 5vw, 3rem); color:var(--brand-900); }
-  .hero .lede{ color:var(--ink-soft); max-width:38rem; margin:var(--s3) auto 0; }
+
 
   /* Voting close badge */
   .close-badge{
@@ -137,13 +119,7 @@
   /* Vote action */
   .vote-cta{ text-align:center; padding:0 0 var(--s7); }
 
-  /* Footer */
-  .site-footer{ background:var(--brand-900); color:rgba(255,255,255,.85); text-align:center; padding-block:var(--s6); }
-  .site-footer .crest{ display:inline-block; width:50px; height:50px; margin:0 auto var(--s3); box-shadow:inset 0 0 0 2px rgba(255,255,255,.35); }
-  .site-footer h3{ color:#fff; font-size:1.2rem; }
-  .site-footer p{ margin:.3rem 0; font-size:.95rem; }
-  .site-footer .tag{ font-style:italic; color:rgba(255,255,255,.9); }
-  .site-footer .fine{ color:rgba(255,255,255,.55); font-size:.82rem; margin-top:var(--s4); }
+
   
   /* Tally voting form card */
   .vote-cta .section-head{ text-align:center; margin-bottom:var(--s4); }
@@ -165,7 +141,7 @@
 
   <header class="topbar">
     <div class="wrap">
-      <a class="brand-mark" href="/" aria-label="Catholic Church of the Lord's Baptism — home">
+      <a class="brand-mark" href="/" aria-label="Catholic Church of the Lord's Baptism �” home">
         <span class="crest" role="img" aria-label="Church crest"></span>
         <span class="name">The Lord's Baptism</span>
       </a>
@@ -174,7 +150,7 @@
   </header>
 
   <main>
-    <section class="hero">
+    <section class="hero hero--light">
       <div class="wrap">
         <span class="eyebrow">Commitment Sunday · 2026</span>
         <h1>Joyfully Commit to our Harvest of God's faithfulness</h1>
@@ -244,7 +220,7 @@
             <picture>
               <source srcset="Harvest-of-Gods-Faithfulness-Poster-1.webp" type="image/webp" />
               <img src="Harvest-of-Gods-Faithfulness-Poster-1.jpg" width="640" height="1397"
-                   alt="Harvest of God's Faithfulness — poster 1 for the Annual Church Harvest Celebration at the Catholic Church of the Lord's Baptism, Osapa Lekki." loading="lazy" decoding="async" />
+                   alt="Harvest of God's Faithfulness �” poster 1 for the Annual Church Harvest Celebration at the Catholic Church of the Lord's Baptism, Osapa Lekki." loading="lazy" decoding="async" />
             </picture>
           </div>
         </article>
@@ -254,7 +230,7 @@
             <picture>
               <source srcset="Harvest-of-Gods-Faithfulness-Poster-2.webp" type="image/webp" />
               <img src="Harvest-of-Gods-Faithfulness-Poster-2.jpg" width="640" height="1397"
-                   alt="Harvest of God's Faithfulness — poster 2 for the Annual Church Harvest Celebration at the Catholic Church of the Lord's Baptism, Osapa Lekki." loading="lazy" decoding="async" />
+                   alt="Harvest of God's Faithfulness �” poster 2 for the Annual Church Harvest Celebration at the Catholic Church of the Lord's Baptism, Osapa Lekki." loading="lazy" decoding="async" />
             </picture>
           </div>
         </article>
@@ -264,7 +240,7 @@
             <picture>
               <source srcset="Harvest-of-Gods-Faithfulness-Poster-3.webp" type="image/webp" />
               <img src="Harvest-of-Gods-Faithfulness-Poster-3.jpg" width="640" height="1397"
-                   alt="Harvest of God's Faithfulness — poster 3 for the Annual Church Harvest Celebration at the Catholic Church of the Lord's Baptism, Osapa Lekki." loading="lazy" decoding="async" />
+                   alt="Harvest of God's Faithfulness �” poster 3 for the Annual Church Harvest Celebration at the Catholic Church of the Lord's Baptism, Osapa Lekki." loading="lazy" decoding="async" />
             </picture>
           </div>
         </article>

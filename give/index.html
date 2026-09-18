@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Give — Catholic Church of the Lord's Baptism</title>
-<meta name="description" content="Give securely to the Catholic Church of the Lord's Baptism, Osapa Lekki — Offertory, Mass Booking & Tithe, Donation Projects, Annual Harvest, and parish societies." />
+<title>Give �” Catholic Church of the Lord's Baptism</title>
+<meta name="description" content="Give securely to the Catholic Church of the Lord's Baptism, Osapa Lekki �” Offertory, Mass Booking & Tithe, Donation Projects, Annual Harvest, and parish societies." />
 <meta name="theme-color" content="#102A43" />
 
 <!-- Fonts: Spectral (dignified serif headings) + Public Sans (accessibility-first body) -->
@@ -14,12 +14,12 @@
 
 <style>
   /* =========================================================
-     DESIGN TOKENS — baptismal water (deep blue) + sacred gold
+     DESIGN TOKENS �” baptismal water (deep blue) + sacred gold
      on cool chapel-white. High contrast for older eyes.
      The church crest is embedded once below as --logo-url.
      ========================================================= */
   :root{
-    /* Typography — unified across give / join / harvest */
+    /* Typography �” unified across give / join / harvest */
     --font-head:"Spectral", Georgia, "Times New Roman", serif;
     --font-body:"Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --brand-900:#102A43;
@@ -71,45 +71,13 @@
   .skip:focus{ top:var(--s3); }
   :where(a,button,input,select,label,[tabindex]):focus-visible{ outline:3px solid var(--gold); outline-offset:3px; border-radius:6px; }
 
-  /* ---- Buttons ---- */
-  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:.6rem; min-height:54px; padding:.85rem 1.5rem; border-radius:var(--r-pill); font:inherit; font-weight:700; text-decoration:none; cursor:pointer; border:2px solid transparent; transition:transform .12s ease, box-shadow .12s ease, background .12s ease; }
-  .btn:active{ transform:translateY(1px); }
-  .btn-gold{ background:var(--gold); color:var(--brand-900); }
-  .btn-gold:hover{ background:#b88f37; }
-  .btn-ghost{ background:transparent; color:var(--brand-900); border-color:var(--brand-700); }
-  .btn-ghost:hover{ background:rgba(28,78,120,.07); }
-  .btn-wa{ background:var(--success); color:#fff; width:100%; }
-  .btn-wa:hover{ background:#235740; }
 
-  /* ---- the crest (used in top bar, hero and footer) ---- */
-  .crest{ background:var(--logo-url) center/contain no-repeat; flex:none; }
 
-  /* =========================================================
-     TOP BAR
-     ========================================================= */
-  .topbar{ position:sticky; top:0; z-index:30; background:rgba(251,252,254,.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
-  .topbar .wrap{ display:flex; align-items:center; justify-content:space-between; padding-block:.6rem; }
-  .brand-mark{ display:flex; align-items:center; gap:.6rem; text-decoration:none; color:var(--ink); }
-  .brand-mark .crest{ width:40px; height:40px; }
-  .brand-mark .name{ font-family:var(--font-head); font-weight:600; font-size:1.05rem; line-height:1.1; }
-  .topbar .btn{ min-height:44px; padding:.5rem 1.15rem; font-size:1rem; }
 
-  /* =========================================================
-     HERO
-     ========================================================= */
-  .hero{ position:relative; overflow:hidden; isolation:isolate;
-    background:
-      radial-gradient(120% 80% at 50% -10%, rgba(201,162,75,.20), transparent 55%),
-      linear-gradient(180deg, var(--brand-900) 0%, #163b5b 60%, var(--brand-700) 100%);
-    color:#fff; text-align:center; padding-block:var(--s7) calc(var(--s8) + 2.5rem); }
-  .hero-logo{ width:clamp(104px, 24vw, 140px); height:clamp(104px, 24vw, 140px); margin:0 auto var(--s4); filter:drop-shadow(0 8px 22px rgba(0,0,0,.4)); animation:logo-in .8s ease both; }
-  @keyframes logo-in{ from{ opacity:0; transform:scale(.9); } to{ opacity:1; transform:none; } }
-  .hero h1{ color:#fff; font-size:clamp(2.3rem, 8vw, 3.5rem); font-weight:600; letter-spacing:-.01em; }
-  .hero .eyebrow{ display:inline-block; font-family:var(--font-body); font-weight:600; letter-spacing:.18em; text-transform:uppercase; font-size:.8rem; color:var(--gold-soft); margin-bottom:var(--s3); }
-  .hero p.lede{ color:rgba(255,255,255,.92); font-size:1.2rem; max-width:30rem; margin-inline:auto; }
-  .hero .cta-row{ display:flex; flex-direction:column; gap:var(--s2); align-items:center; margin-top:var(--s4); }
-  .hero .trust{ margin-top:var(--s4); color:rgba(255,255,255,.82); font-size:1rem; font-style:italic; letter-spacing:.01em; }
-  .hero .edge{ position:absolute; left:0; right:0; bottom:-1px; width:100%; display:block; }
+
+
+
+
 
   /* =========================================================
      STEPS
@@ -174,22 +142,7 @@
   .confirm-card .btn-wa{ margin-top:var(--s4); }
   .fine{ color:var(--ink-soft); font-size:.85rem; margin-top:var(--s3); }
 
-  /* =========================================================
-     CONTACT + FOOTER
-     ========================================================= */
-  .contact-grid{ display:grid; gap:var(--s3); }
-  .contact-item{ display:flex; gap:var(--s3); align-items:flex-start; }
-  .contact-item .ic{ flex:none; width:42px; height:42px; border-radius:var(--r-pill); display:grid; place-items:center; background:var(--brand-900); color:var(--gold); }
-  .contact-item .ct-label{ font-size:.82rem; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft); font-weight:700; }
-  .contact-item a, .contact-item span{ font-size:1.08rem; color:var(--ink); text-decoration:none; }
-  .contact-item a:hover{ text-decoration:underline; }
 
-  .site-footer{ background:var(--brand-900); color:rgba(255,255,255,.85); text-align:center; padding-block:var(--s6); }
-  .site-footer .crest{ display:inline-block; width:50px; height:50px; margin:0 auto var(--s3); box-shadow:inset 0 0 0 2px rgba(255,255,255,.35); }
-  .site-footer h3{ color:#fff; font-size:1.2rem; }
-  .site-footer p{ margin:.3rem 0; font-size:.95rem; }
-  .site-footer .tag{ font-style:italic; color:rgba(255,255,255,.9); }
-  .site-footer .fine{ color:rgba(255,255,255,.55); font-size:.82rem; margin-top:var(--s4); }
 
   /* hub (hidden until enabled) */
   .hub-grid{ display:grid; gap:var(--s2); margin-top:var(--s4); }
@@ -217,7 +170,7 @@
 <!-- ======================= TOP BAR ======================= -->
 <header class="topbar">
   <div class="wrap">
-    <a class="brand-mark" href="/" aria-label="Catholic Church of the Lord's Baptism — home">
+    <a class="brand-mark" href="/" aria-label="Catholic Church of the Lord's Baptism �” home">
       <span class="crest" role="img" aria-label="Church crest"></span>
       <span class="name" id="brand-name">The Lord's Baptism</span>
     </a>
@@ -227,15 +180,15 @@
 
 <main>
 <!-- ======================= HERO ======================= -->
-<section class="hero" id="top">
+<section class="hero hero--dark" id="top">
   <div class="wrap">
-    <div class="hero-logo crest" role="img" aria-label="Catholic Church of the Lord's Baptism crest"></div>
+    <span class="crest" role="img" aria-label="Catholic Church of the Lord's Baptism crest"></span>
     <span class="eyebrow">Catholic Church of the Lord's Baptism</span>
     <h1 id="hero-title">Your generosity ripples outward</h1>
     <p class="lede" id="hero-lede">Every gift sustains the worship, works of mercy, and growth of our parish family. Thank you for giving.</p>
     <div class="cta-row">
       <a class="btn btn-gold" href="#give">See ways to give</a>
-      <a class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,.5)" href="#contact">Contact the parish</a>
+      <a class="btn btn-ghost" href="#contact">Contact the parish</a>
     </div>
     <p class="trust" id="hero-trust">Lord baptise us with your Spirit</p>
   </div>
@@ -249,7 +202,7 @@
   <div class="wrap">
     <div class="section-head"><h2 id="how-title">Giving takes one minute</h2></div>
     <ol class="steps" style="list-style:none;padding:0;margin:0;">
-      <li class="step"><span class="num">1</span><div><h3>Choose a fund</h3><p>Pick what your gift is for — offertory, a project, the harvest, or a parish society.</p></div></li>
+      <li class="step"><span class="num">1</span><div><h3>Choose a fund</h3><p>Pick what your gift is for �” offertory, a project, the harvest, or a parish society.</p></div></li>
       <li class="step"><span class="num">2</span><div><h3>Copy the account number</h3><p>One tap copies the account number so there are no typing mistakes.</p></div></li>
       <li class="step"><span class="num">3</span><div><h3>Transfer in your bank app</h3><p>Paste it into your bank app or USSD, send your gift, and you're done.</p></div></li>
     </ol>
@@ -354,7 +307,7 @@
 <script>
   const CONFIG = {
     /* ============================================================
-       DEFAULT FUND — the fund pre-selected when the page opens.
+       DEFAULT FUND �” the fund pre-selected when the page opens.
        Change ONLY this one value to switch the default category:
          • During harvest season  ->  "harvest"
          • After harvest season    ->  "offertory"
@@ -402,7 +355,7 @@
         id: "harvest",
         name: "Annual Harvest",
         tag: "This season",
-        blurb: "Our yearly harvest thanksgiving — supporting the parish for the year ahead.",
+        blurb: "Our yearly harvest thanksgiving �” supporting the parish for the year ahead.",
         accounts: [
           { accountName: "Catholic Church of the Lord's Baptism", bankName: "Zenith Bank", accountNumber: "1312487204" }
         ]
@@ -436,7 +389,7 @@
       sundayMass:  "Preparation 8:00 AM · Holy Mass 8:30 AM",
       weekdayMass: "Mon, Wed & Fri 6:30 AM · Sat 8:00 AM · Public Holidays 8:00 AM",
       confession:  "Saturday 8:45 AM",
-      officeHours: "Priest's Office: Tue, Wed & Fri 9:00 AM – 2:00 PM",
+      officeHours: "Priest's Office: Tue, Wed & Fri 9:00 AM �“ 2:00 PM",
       phone:       "+234 913 222 2286",
       email:       "info@cclblekki.com"
     },
@@ -465,7 +418,7 @@
     $("#hero-title").textContent  = CONFIG.heroTitle;
     $("#hero-lede").textContent   = CONFIG.heroLede;
     $("#hero-trust").textContent  = CONFIG.trustLine;
-    document.title = "Give — " + CONFIG.churchName;
+    document.title = "Give �” " + CONFIG.churchName;
 
     /* copy to clipboard with fallback */
     function copy(text, btn) {
@@ -519,7 +472,7 @@
       return `<div class="verify-note"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1C4E78" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg><span>Before sending, check the account name reads <strong>${esc(name)}</strong>. The parish never collects gifts through personal accounts.</span></div>`;
     }
     function confirmLinkHTML(msg) {
-      return `<a class="btn btn-wa" style="margin-top:1.25rem" href="${waLink(CONFIG.whatsappNumber, msg)}" target="_blank" rel="noopener noreferrer">${waIcon} I've sent my gift — confirm</a>`;
+      return `<a class="btn btn-wa" style="margin-top:1.25rem" href="${waLink(CONFIG.whatsappNumber, msg)}" target="_blank" rel="noopener noreferrer">${waIcon} I've sent my gift �” confirm</a>`;
     }
 
     /* fund chips */

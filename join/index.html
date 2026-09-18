@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Register as a Parishioner ‚Äî Catholic Church of the Lord's Baptism</title>
+<title>Register as a Parishioner ‚Ä‚Äù Catholic Church of the Lord's Baptism</title>
 <meta name="description" content="Join the parish register of the Catholic Church of the Lord's Baptism, Osapa Lekki. Add your household to our records." />
 <meta name="theme-color" content="#102A43" />
 
@@ -13,11 +13,11 @@
 
 <style>
   /* =========================================================
-     DESIGN TOKENS ‚Äî identical to the give.cclbparish.com page
+     DESIGN TOKENS ‚Ä‚Äù identical to the give.cclbparish.com page
      so the two subdomains feel like one site.
      ========================================================= */
   :root{
-    /* Typography ‚Äî unified across give / join / harvest */
+    /* Typography ‚Ä‚Äù unified across give / join / harvest */
     --font-head:"Spectral", Georgia, "Times New Roman", serif;
     --font-body:"Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --brand-900:#102A43; --brand-700:#1C4E78; --brand-500:#2E6F9E;
@@ -46,36 +46,13 @@
   
   :where(a,button,[tabindex]):focus-visible{ outline:3px solid var(--gold); outline-offset:3px; border-radius:6px; }
 
-  /* crest reused in header + footer */
-  .crest{ background:var(--logo-url) center/contain no-repeat; flex:none; border-radius:50%;
-          box-shadow:inset 0 0 0 2px var(--gold-soft); }
 
-  /* ---- buttons ---- */
-  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:.5rem; min-height:46px;
-        padding:.55rem 1.2rem; border-radius:var(--r-pill); font:inherit; font-weight:700;
-        text-decoration:none; cursor:pointer; border:2px solid transparent; }
-  .btn-ghost{ background:transparent; color:var(--brand-900); border-color:var(--brand-700); }
-  .btn-ghost:hover{ background:rgba(28,78,120,.07); }
 
-  /* ---- top bar ---- */
-  .topbar{ position:sticky; top:0; z-index:30; background:rgba(251,252,254,.9);
-           backdrop-filter:blur(8px); border-bottom:1px solid var(--line); }
-  .topbar .wrap{ display:flex; align-items:center; justify-content:space-between; padding-block:.6rem; }
-  .brand-mark{ display:flex; align-items:center; gap:.6rem; text-decoration:none; color:var(--ink); }
-  .brand-mark .crest{ width:40px; height:40px; }
-  .brand-mark .name{ font-family:var(--font-head); font-weight:600; font-size:1.05rem; }
 
-  /* ---- hero ---- */
-  .hero{ position:relative; overflow:hidden;
-    background:
-      radial-gradient(120% 80% at 50% -10%, rgba(201,162,75,.20), transparent 55%),
-      linear-gradient(180deg, var(--brand-900) 0%, #163b5b 60%, var(--brand-700) 100%);
-    color:#fff; text-align:center; padding-block:var(--s7) calc(var(--s7) + 1.5rem); }
-  .hero .crest{ width:96px; height:96px; margin:0 auto var(--s4); box-shadow:inset 0 0 0 2px rgba(255,255,255,.4); filter:drop-shadow(0 8px 22px rgba(0,0,0,.35)); }
-  .hero .eyebrow{ display:inline-block; font-weight:600; letter-spacing:.18em; text-transform:uppercase; font-size:.8rem; color:var(--gold-soft); margin-bottom:var(--s3); }
-  .hero h1{ color:#fff; font-size:clamp(2rem, 7vw, 3rem); }
-  .hero p{ color:rgba(255,255,255,.92); font-size:1.15rem; max-width:32rem; margin:var(--s3) auto 0; }
-  .hero .edge{ position:absolute; left:0; right:0; bottom:-1px; width:100%; display:block; }
+
+
+
+
 
   /* ---- form section ---- */
   
@@ -97,13 +74,7 @@
   .form-embed iframe{ width:100%; border:0; display:block; }
   .embed-fallback{ font-size:.95rem; color:var(--ink-soft); text-align:center; }
 
-  /* ---- footer ---- */
-  .site-footer{ background:var(--brand-900); color:rgba(255,255,255,.85); text-align:center; padding-block:var(--s6); }
-  .site-footer .crest{ display:inline-block; width:50px; height:50px; margin:0 auto var(--s3); box-shadow:inset 0 0 0 2px rgba(255,255,255,.35); }
-  .site-footer h3{ color:#fff; font-size:1.2rem; }
-  .site-footer p{ margin:.3rem 0; font-size:.95rem; }
-  .site-footer .tag{ font-style:italic; color:rgba(255,255,255,.9); }
-  .site-footer .fine{ color:rgba(255,255,255,.55); font-size:.82rem; margin-top:var(--s4); }
+
 
   @media (prefers-reduced-motion:reduce){ *{ animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
 </style>
@@ -114,7 +85,7 @@
 <!-- ======================= TOP BAR ======================= -->
 <header class="topbar">
   <div class="wrap">
-    <a class="brand-mark" href="/" aria-label="Catholic Church of the Lord's Baptism ‚Äî home">
+    <a class="brand-mark" href="/" aria-label="Catholic Church of the Lord's Baptism ‚Ä‚Äù home">
       <span class="crest" role="img" aria-label="Church crest"></span>
       <span class="name">The Lord's Baptism</span>
     </a>
@@ -125,7 +96,7 @@
 
 <main>
 <!-- ======================= HERO ======================= -->
-<section class="hero" id="top">
+<section class="hero hero--dark" id="top">
   <div class="wrap">
     <span class="crest" role="img" aria-label="Catholic Church of the Lord's Baptism crest"></span>
     <span class="eyebrow">Catholic Church of the Lord's Baptism</span>
@@ -144,7 +115,7 @@
 
       <!-- ===== Tally standard embed =====
            EDIT #2: replace TALLY_FORM_ID (both places) with your form's ID
-           (from Tally ? Share ? Embed ? "Standard"). Keep the query string ó
+           (from Tally ? Share ? Embed ? "Standard"). Keep the query string 
            it hides Tally's own title, makes the background transparent so it
            blends with this white card, and lets the iframe resize to fit. -->
       <div class="form-embed">
@@ -159,7 +130,7 @@
         </noscript>
       </div>
 
-      <!-- NDPA 2023 consent / privacy notice ó shown BELOW the form -->
+      <!-- NDPA 2023 consent / privacy notice  shown BELOW the form -->
       <div class="notice" role="note">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1C4E78" stroke-width="2" aria-hidden="true">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>
