@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Give �” Catholic Church of the Lord's Baptism</title>
-<meta name="description" content="Give securely to the Catholic Church of the Lord's Baptism, Osapa Lekki �” Offertory, Mass Booking & Tithe, Donation Projects, Annual Harvest, and parish societies." />
+<title>Give — Catholic Church of the Lord's Baptism</title>
+<meta name="description" content="Give securely to the Catholic Church of the Lord's Baptism, Osapa Lekki — Offertory, Mass Booking & Tithe, Donation Projects, Annual Harvest, and parish societies." />
 <meta name="theme-color" content="#102A43" />
 
 <!-- Fonts: Spectral (dignified serif headings) + Public Sans (accessibility-first body) -->
@@ -17,12 +17,12 @@
 
 <style>
   /* =========================================================
-     DESIGN TOKENS �” baptismal water (deep blue) + sacred gold
+     DESIGN TOKENS — baptismal water (deep blue) + sacred gold
      on cool chapel-white. High contrast for older eyes.
      The church crest is embedded once below as --logo-url.
      ========================================================= */
   :root{
-    /* Typography �” unified across give / join / harvest */
+    /* Typography — unified across give / join / harvest */
     --font-head:"Spectral", Georgia, "Times New Roman", serif;
     --font-body:"Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --brand-900:#102A43;
@@ -173,7 +173,7 @@
 <!-- ======================= TOP BAR ======================= -->
 <header class="topbar">
   <div class="wrap">
-    <a class="brand-mark" href="/" aria-label="Catholic Church of the Lord's Baptism �” home">
+    <a class="brand-mark" href="/" aria-label="Catholic Church of the Lord's Baptism — home">
       <span class="crest" role="img" aria-label="Church crest"></span>
       <span class="name" id="brand-name">The Lord's Baptism</span>
     </a>
@@ -205,7 +205,7 @@
   <div class="wrap">
     <div class="section-head"><h2 id="how-title">Giving takes one minute</h2></div>
     <ol class="steps" style="list-style:none;padding:0;margin:0;">
-      <li class="step"><span class="num">1</span><div><h3>Choose a fund</h3><p>Pick what your gift is for �” offertory, a project, the harvest, or a parish society.</p></div></li>
+      <li class="step"><span class="num">1</span><div><h3>Choose a fund</h3><p>Pick what your gift is for — offertory, a project, the harvest, or a parish society.</p></div></li>
       <li class="step"><span class="num">2</span><div><h3>Copy the account number</h3><p>One tap copies the account number so there are no typing mistakes.</p></div></li>
       <li class="step"><span class="num">3</span><div><h3>Transfer in your bank app</h3><p>Paste it into your bank app or USSD, send your gift, and you're done.</p></div></li>
     </ol>
@@ -310,7 +310,7 @@
 <script>
   const CONFIG = {
     /* ============================================================
-       DEFAULT FUND �” the fund pre-selected when the page opens.
+       DEFAULT FUND — the fund pre-selected when the page opens.
        Change ONLY this one value to switch the default category:
          • During harvest season  ->  "harvest"
          • After harvest season    ->  "offertory"
@@ -358,7 +358,7 @@
         id: "harvest",
         name: "Annual Harvest",
         tag: "This season",
-        blurb: "Our yearly harvest thanksgiving �” supporting the parish for the year ahead.",
+        blurb: "Our yearly harvest thanksgiving — supporting the parish for the year ahead.",
         accounts: [
           { accountName: "Catholic Church of the Lord's Baptism", bankName: "Zenith Bank", accountNumber: "1312487204" }
         ]
@@ -392,7 +392,7 @@
       sundayMass:  "Preparation 8:00 AM · Holy Mass 8:30 AM",
       weekdayMass: "Mon, Wed & Fri 6:30 AM · Sat 8:00 AM · Public Holidays 8:00 AM",
       confession:  "Saturday 8:45 AM",
-      officeHours: "Priest's Office: Tue, Wed & Fri 9:00 AM �“ 2:00 PM",
+      officeHours: "Priest's Office: Tue, Wed & Fri 9:00 AM – 2:00 PM",
       phone:       "+234 913 222 2286",
       email:       "info@cclblekki.com"
     },
@@ -421,7 +421,7 @@
     $("#hero-title").textContent  = CONFIG.heroTitle;
     $("#hero-lede").textContent   = CONFIG.heroLede;
     $("#hero-trust").textContent  = CONFIG.trustLine;
-    document.title = "Give �” " + CONFIG.churchName;
+    document.title = "Give — " + CONFIG.churchName;
 
     /* copy to clipboard with fallback */
     function copy(text, btn) {
@@ -475,7 +475,7 @@
       return `<div class="verify-note"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1C4E78" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg><span>Before sending, check the account name reads <strong>${esc(name)}</strong>. The parish never collects gifts through personal accounts.</span></div>`;
     }
     function confirmLinkHTML(msg) {
-      return `<a class="btn btn-wa" style="margin-top:1.25rem" href="${waLink(CONFIG.whatsappNumber, msg)}" target="_blank" rel="noopener noreferrer">${waIcon} I've sent my gift �” confirm</a>`;
+      return `<a class="btn btn-wa" style="margin-top:1.25rem" href="${waLink(CONFIG.whatsappNumber, msg)}" target="_blank" rel="noopener noreferrer">${waIcon} I've sent my gift — confirm</a>`;
     }
 
     /* fund chips */
