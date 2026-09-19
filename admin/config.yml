@@ -21,8 +21,8 @@ logo_url: https://decapbridge.com/decapcms-with-bridge.svg
 # Add site links in Decap CMS (optional)
 site_url: https://cclbparish.com
 
-media_folder: "images/gallery"
-public_folder: "images/gallery"
+media_folder: "/images/gallery"
+public_folder: "/images/gallery"
 
 collections:
   - name: "content"
