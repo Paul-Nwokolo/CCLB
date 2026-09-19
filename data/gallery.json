@@ -13,6 +13,10 @@
     {
       "image": "/images/gallery/cclb.jpg",
       "alt": "CCLB Lekki Logo"
+    },
+    {
+      "video": "https://www.youtube.com/embed/aqz-KE-bpKQ",
+      "alt": "Test video slide (temporary)"
     }
   ]
 }
