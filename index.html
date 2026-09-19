@@ -253,6 +253,42 @@ document.addEventListener('DOMContentLoaded', async () => {
         else img.onload = checkRatio;
       }
 
+      // Setup lightbox logic first so it's available for single-item returns too
+      const lightbox = document.getElementById('flyerLightbox');
+      const lightboxImg = document.getElementById('flyerLightboxImg');
+      const closeBtn = lightbox.querySelector('.flyer-close');
+      let triggerElement = null;
+
+      function openLightbox(src, alt, trigger) {
+        triggerElement = trigger;
+        lightboxImg.src = src;
+        lightboxImg.alt = alt || 'Image preview';
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+      }
+
+      function closeLightbox() {
+        if (!lightbox.classList.contains('open')) return;
+        lightbox.classList.remove('open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        lightboxImg.src = '';
+        document.body.style.overflow = '';
+        if (triggerElement) {
+          triggerElement.focus();
+          triggerElement = null;
+        }
+      }
+
+      lightbox.addEventListener('click', e => {
+        if (e.target === lightbox || e.target.classList.contains('flyer-close')) closeLightbox();
+      });
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeLightbox();
+      });
+
       function renderMedia(item, index) {
         if (item.video) {
           const iframe = document.createElement('iframe');
@@ -272,6 +308,16 @@ document.addEventListener('DOMContentLoaded', async () => {
           img.src = item.image;
           img.alt = item.alt || '';
           img.loading = index === 0 ? 'eager' : 'lazy';
+          img.style.cursor = 'pointer';
+          img.setAttribute('role', 'button');
+          img.setAttribute('tabindex', '0');
+          img.addEventListener('click', () => openLightbox(img.currentSrc || img.src, img.alt, img));
+          img.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              openLightbox(img.currentSrc || img.src, img.alt, img);
+            }
+          });
           handleImageRatio(img);
           return img;
         }
@@ -415,6 +461,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 });
 </script>
+
+<div class="flyer-lightbox" id="flyerLightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Image preview">
+  <button class="flyer-close" type="button" aria-label="Close">&times;</button>
+  <img id="flyerLightboxImg" src="" alt="Flyer full view" decoding="async" />
+</div>
+
 </body>
 </html>
 
