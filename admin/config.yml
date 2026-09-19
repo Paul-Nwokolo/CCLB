@@ -40,7 +40,7 @@ collections:
                 name: "image"
                 widget: "image"
                 required: false
-                hint: "Upload a photo for this slide."
+                hint: "Upload a landscape photo (not a logo or screenshot), roughly 16:9 - a photo taken sideways on a phone works well."
               - label: "Video Embed URL"
                 name: "video"
                 widget: "string"
