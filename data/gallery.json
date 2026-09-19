@@ -9,6 +9,10 @@
       "image": "https://images.unsplash.com/photo-1517456793572-1d8efd6dc135?auto=format&fit=crop&w=800&h=450&q=80",
       "video": "",
       "alt": "A community gathering"
+    },
+    {
+      "image": "/images/gallery/cclb.jpg",
+      "alt": "CCLB Lekki Logo"
     }
   ]
 }
