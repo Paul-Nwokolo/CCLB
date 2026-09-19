@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const res = await fetch('data/gallery.json');
     if (res.ok) {
       const data = await res.json();
-      const items = (data.items || []).filter(i => i.image);
+      const items = (data.items || []).filter(i => i.image || i.video);
       
       if (items.length === 0) {
         container.style.display = 'none';
@@ -253,15 +253,37 @@ document.addEventListener('DOMContentLoaded', async () => {
         else img.onload = checkRatio;
       }
 
+      function renderMedia(item, index) {
+        if (item.video) {
+          const iframe = document.createElement('iframe');
+          iframe.src = item.video;
+          iframe.setAttribute('allow', 'fullscreen');
+          iframe.allowFullscreen = true;
+          iframe.style.width = '100%';
+          iframe.style.height = '100%';
+          iframe.style.border = '0';
+          iframe.style.display = 'block';
+          iframe.style.aspectRatio = '16/9';
+          iframe.loading = index === 0 ? 'eager' : 'lazy';
+          iframe.title = item.alt || 'Video slide';
+          return iframe;
+        } else {
+          const img = document.createElement('img');
+          img.src = item.image;
+          img.alt = item.alt || '';
+          img.loading = index === 0 ? 'eager' : 'lazy';
+          handleImageRatio(img);
+          return img;
+        }
+      }
+
       if (items.length === 1) {
         const wrap = document.createElement('div');
         wrap.className = 'full-bleed-photo';
-        const img = document.createElement('img');
-        img.src = items[0].image;
-        img.alt = items[0].alt || '';
-        img.loading = 'lazy';
-        handleImageRatio(img);
-        wrap.appendChild(img);
+        const media = renderMedia(items[0], 0);
+        // Ensure iframe respects the full-bleed max-height constraint
+        if (items[0].video) media.style.maxHeight = '70vh';
+        wrap.appendChild(media);
         container.appendChild(wrap);
         return;
       }
@@ -293,12 +315,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         slide.setAttribute('aria-roledescription', 'slide');
         slide.setAttribute('aria-label', `${index + 1} of ${items.length}`);
         
-        const img = document.createElement('img');
-        img.src = item.image;
-        img.alt = item.alt || '';
-        img.loading = index === 0 ? 'eager' : 'lazy';
-        handleImageRatio(img);
-        slide.appendChild(img);
+        const media = renderMedia(item, index);
+        slide.appendChild(media);
         track.appendChild(slide);
 
         const dot = document.createElement('button');
