@@ -1,0 +1,104 @@
+<!-- =========================================================
+     ⬇️  CHURCH COMMITTEE: EDIT ONLY THE CONFIG BLOCK BELOW  ⬇️
+     You do NOT need to touch any of the code above.
+     Replace details, save, and re-upload the file to update.
+     ========================================================= -->
+<script>
+  const CONFIG = {
+    /* ============================================================
+       DEFAULT FUND — the fund pre-selected when the page opens.
+       Change ONLY this one value to switch the default category:
+         • During harvest season  ->  "harvest"
+         • After harvest season    ->  "offertory"
+       (Must match one of the fund "id" values listed further below.)
+       ============================================================ */
+    defaultFund: "harvest",
+
+    /* ---- Parish identity ---- */
+    churchName:   "Catholic Church of the Lord's Baptism",
+    shortName:    "The Lord's Baptism",
+    heroTitle:    "Your generosity ripples outward",
+    heroLede:     "Every gift sustains the worship, works of mercy, and growth of our parish family. Thank you for giving.",
+    trustLine:    "Lord baptise us with your Spirit",
+    footerTag:    "Lord baptise us with your Spirit",
+    footerCredit: "Built and maintained by the CCLB Parish",
+
+    /* ---- WhatsApp number for confirmations (digits only, no +, no leading 0) ----
+       +234 913 222 2286  ->  2349132222286                                          */
+    whatsappNumber: "2349132222286",
+
+    /* ---- Funds / campaigns ----
+       Each normal fund has one or more "accounts".
+       A fund can instead have a "societies" list (see Other Societies),
+       which shows a picker so givers can browse each society's account.            */
+    funds: [
+      {
+        id: "offertory",
+        name: "Offertory, Mass Booking & Tithe",
+        tag: "",
+        blurb: "Your weekly offertory, Mass intentions, and tithe.",
+        accounts: [
+          { accountName: "Catholic Church of the Lord's Baptism", bankName: "Globus Bank", accountNumber: "1000008403" }
+        ]
+      },
+      {
+        id: "projects",
+        name: "Donation Projects",
+        tag: "",
+        blurb: "Support parish projects and development.",
+        accounts: [
+          { accountName: "Catholic Church of the Lord's Baptism", bankName: "Zenith Bank", accountNumber: "1015067231" }
+        ]
+      },
+      {
+        id: "harvest",
+        name: "Annual Harvest",
+        tag: "This season",
+        blurb: "Our yearly harvest thanksgiving — supporting the parish for the year ahead.",
+        accounts: [
+          { accountName: "Catholic Church of the Lord's Baptism", bankName: "Zenith Bank", accountNumber: "1312487204" }
+        ]
+      },
+      {
+        id: "societies",
+        name: "Other Societies",
+        tag: "",
+        blurb: "Give directly to one of our parish societies and ministries. Use the menu below to find yours.",
+        societies: [
+          { name: "Catholic Men Organization",            accountName: "CCLB - Catholic Men Organization",        bankName: "Zenith Bank", accountNumber: "1312535088" },
+          { name: "Catholic Women Organization",          accountName: "CCLB - Catholic Women Organization",      bankName: "Zenith Bank", accountNumber: "1312524871" },
+          { name: "Catholic Youth Organization of Nigeria", accountName: "CCLB - Catholic Youth Organization",     bankName: "Zenith Bank", accountNumber: "1312524857" },
+          { name: "Missionary Childhood Association",      accountName: "CCLB - Missionary Childhood Association", bankName: "Zenith Bank", accountNumber: "1229456010" },
+          { name: "St. Vincent De Paul",                   accountName: "CCLB - St. Vincent De Paul",              bankName: "Zenith Bank", accountNumber: "1312524826" },
+          { name: "Confraternity of Christian Mothers",    accountName: "CCLB - Confraternity of Christian Mothers", bankName: "Zenith Bank", accountNumber: "1229456742" },
+          { name: "Guild of Faith Formators",              accountName: "CCLB - Guild of Faith Formators",         bankName: "Zenith Bank", accountNumber: "1229456979" },
+          { name: "Ministry of Lectors",                   accountName: "CCLB - Ministry of Lectors",              bankName: "Zenith Bank", accountNumber: "1229457505" },
+          { name: "Ministry of Choir",                     accountName: "CCLB - Ministry of Choir",                bankName: "Zenith Bank", accountNumber: "1229457653" },
+          { name: "Ministry of Altar Servers",             accountName: "CCLB - Ministry of Altar Servers",        bankName: "Zenith Bank", accountNumber: "1229457732" },
+          { name: "Parish Laity Council",                  accountName: "CCLB - Parish Laity Council",             bankName: "Zenith Bank", accountNumber: "1229456780" },
+          { name: "Parish Pastoral Council",               accountName: "CCLB - Parish Pastoral Council",          bankName: "Zenith Bank", accountNumber: "1229456917" }
+        ]
+      }
+    ],
+
+    /* ---- Contact details ---- */
+    contact: {
+      address:     "Osapa London, off Beach Resort, Lekki, Lagos",
+      mapUrl:      "https://maps.google.com/?q=Catholic+Church+of+the+Lord%27s+Baptism+Osapa+Lekki+Lagos",
+      sundayMass:  "Preparation 8:00 AM · Holy Mass 8:30 AM",
+      weekdayMass: "Mon, Wed & Fri 6:30 AM · Sat 8:00 AM · Public Holidays 8:00 AM",
+      confession:  "Saturday 8:45 AM",
+      officeHours: "Priest's Office: Tue, Wed & Fri 9:00 AM – 2:00 PM",
+      phone:       "+234 913 222 2286",
+      email:       "info@cclblekki.com"
+    },
+
+    /* ---- FUTURE: Church Hub (set showHub:true to turn on; QR/URL unchanged) ---- */
+    showHub: false,
+    hubLinks: [
+      { label: "Watch the Livestream", url: "https://youtube.com/@yourparish" },
+      { label: "Follow on Facebook",   url: "https://facebook.com/yourparish" },
+      { label: "Upcoming Events",      url: "#" }
+    ]
+  };
+

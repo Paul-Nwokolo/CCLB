@@ -61,3 +61,8 @@ desktop.ini
 *.log
 tmp/
 *.tmp
+
+# --- Design QA screenshots (local only) ---
+.shots/
+.shots-*/
+test-results/
