@@ -13,6 +13,7 @@ Activating the theme creates the pages `give`, `harvest` and `join` (if the slug
 - `inc/parish.php` the single source of truth for times and contacts. `inc/parts.php` the waterline hero. `inc/icons.php` SVGs.
 - `assets/js/main.js` all behaviour. It reads Mass times and gallery from `<script type="application/json" id="cclb-data">`. `assets/js/vendor/` is GSAP, ScrollTrigger, SplitText (GSAP no-charge licence) and Lenis (MIT).
 - `assets/css/site.css` the whole design. Fonts are in `assets/fonts/`.
+- Media layer (photos and video), **designed, not yet wired**: `assets/css/media.css`, `assets/js/media.js`, the contracts in `MEDIA.md`, a static `prototype/media.html`, and `SHOTLIST.md` for the parish office.
 
 ## Must know
 - Do **not** let LiteSpeed Cache (or any plugin) combine, defer or delay JavaScript on this site. Order matters: vendor scripts, then `main.js`.

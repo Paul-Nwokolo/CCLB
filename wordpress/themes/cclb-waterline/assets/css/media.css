@@ -1,0 +1,186 @@
+/* =====================================================================
+   CCLB Waterline: the media layer (photographs and video).
+   Load after site.css. Markup contracts are in MEDIA.md; the art direction
+   is in DESIGN.md, "Addendum: images and video".
+
+   One rule: every photograph meets the river. Its foot stands in the water
+   and its caption is written in the water. Photos surface as you scroll
+   (the water drains off them), and on hover the water rises again, the same
+   verb as the buttons and the door rows.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   The waterline frame
+   --ar   the image's own ratio, printed inline by PHP (e.g. 1435/812)
+   --r    the ratio actually used: --ar clamped by the slot (--ar-min/--ar-max)
+   --foot share of the photo under water at rest
+   --------------------------------------------------------------------- */
+.wl-frame {
+  --ar-min: 0.8; --ar-max: 1.78;
+  --r: max(var(--ar-min), min(var(--ar-max), var(--ar, 3/2)));
+  --foot: 0.14;
+  --wh-f: clamp(8px, 0.35rem + 0.4vw, 14px);
+  position: relative; margin: 0; overflow: clip; isolation: isolate;
+  container-type: inline-size;
+  background: var(--water); color: var(--water-ink);
+}
+.wl-frame__photo { position: relative; aspect-ratio: var(--r); overflow: clip; background: var(--deep); }
+.wl-frame__photo img {
+  width: 100%; height: 100%; object-fit: cover; object-position: var(--focus, 50% 50%);
+  transition: scale 1s var(--e-out);
+}
+
+/* The water: a box below the photo's foot, as tall as frame + photo so it can
+   rise to full cover with a transform. Outer = rest and hover (CSS).
+   Inner (tide) = surfacing on scroll (GSAP, transform only). */
+.wl-frame__water {
+  --ph: calc(100cqw / (var(--r)));
+  position: absolute; left: 0; right: 0; top: 0; z-index: 1; pointer-events: none;
+  height: calc(100% + var(--ph));
+  translate: 0 calc(var(--ph) * (1 - var(--foot)) - var(--wh-f));
+  transition: translate 0.75s var(--e-out);
+}
+/* Opaque water faded as one layer, so the wave and the body never double up into a seam */
+.wl-frame__tide { position: absolute; inset: 0; opacity: var(--tide-a, 0.74); background: linear-gradient(transparent var(--wh-f), var(--water) var(--wh-f)); }
+.wl-frame__tide .wave { position: absolute; left: 0; top: 0; width: 200%; max-width: none; height: calc(var(--wh-f) + 1px); fill: var(--water); }
+
+/* Caption: written in the water, above it in the stack */
+.wl-frame__cap { position: relative; z-index: 2; padding: 0.8rem 1rem 1rem; font-size: var(--t-s); line-height: 1.4; color: var(--water-ink); background: var(--water); text-wrap: pretty; }
+.wl-frame__cap small { display: block; margin-top: 0.2rem; color: var(--water-muted); font-size: var(--t-xs); }
+[data-tone='water'] .wl-frame__cap, [data-tone='deep'] .wl-frame__cap { padding-inline: 0; }
+
+/* Interactive frames (lightbox, video): a button laid over the whole photo.
+   The <img> stays outside the button so the water can sit between them. */
+.wl-frame__btn { position: absolute; inset: 0; z-index: 3; display: block; width: 100%; height: 100%; color: var(--ink); }
+.wl-frame__btn:focus-visible { outline: 3px solid var(--halo); outline-offset: -3px; border-radius: 0; }
+.wl-frame__hint, .wl-play {
+  position: absolute; left: 0.9rem; bottom: calc(var(--foot) * 100% + 0.9rem);
+  display: inline-flex; align-items: center; gap: 0.55rem; min-height: 2.5rem;
+  padding: 0.5rem 1rem; border-radius: var(--pill);
+  background: var(--air); color: var(--ink); font-size: var(--t-s); font-weight: 500; line-height: 1.1;
+  transition: translate 0.5s var(--e-out), opacity 0.35s var(--e-soft);
+}
+.wl-play { padding-left: 0.7rem; }
+.wl-play svg { width: 1.1rem; height: 1.1rem; }
+.wl-frame__hint { opacity: 0; translate: 0 0.6rem; }
+
+/* Hover / focus: the water rises inside the frame (same verb as .btn and .door) */
+.wl-frame:has(.wl-frame__btn:focus-visible) .wl-frame__water { translate: 0 calc(var(--ph) * (1 - var(--foot) - 0.24) - var(--wh-f)); }
+.wl-frame__btn:focus-visible .wl-frame__hint { opacity: 1; translate: 0 0; }
+.wl-frame__btn:focus-visible .wl-play { translate: 0 -0.35rem; }
+@media (hover: hover) {
+  .wl-frame:has(.wl-frame__btn:hover) .wl-frame__water { translate: 0 calc(var(--ph) * (1 - var(--foot) - 0.24) - var(--wh-f)); }
+  .wl-frame:has(.wl-frame__btn:hover) .wl-frame__photo img { scale: 1.035; }
+  .wl-frame__btn:hover .wl-frame__hint { opacity: 1; translate: 0 0; }
+  .wl-frame__btn:hover .wl-play { translate: 0 -0.35rem; }
+}
+.wl-frame:has(.wl-frame__btn:active) .wl-frame__photo img { scale: 1.015; }
+
+/* Video facade: nothing from YouTube loads until the button is pressed */
+.wl-frame--video { --ar: 16/9; --ar-min: 1.77; }
+.wl-frame__embed { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.wl-frame.is-playing .wl-frame__water { translate: 0 var(--ph); transition-duration: 0.01ms; }
+
+/* ---------------------------------------------------------------------
+   Slot: hero. A strip of the parish just under the surface: it fills what
+   lies below the waterline at rest and rises with the river as you scroll.
+   Seen through the water (luminosity on river blue), never full colour.
+   --------------------------------------------------------------------- */
+.surface { --stage-h: max(100svh, 34rem); }
+.surface--inner { --stage-h: max(86svh, 32rem); }
+.surface__photo {
+  position: absolute; left: 0; right: 0; top: calc(var(--wh) - 1px); z-index: 0;
+  height: calc(var(--stage-h) - var(--rest) + 2px);
+  background: var(--water); overflow: clip; pointer-events: none;
+  -webkit-mask-image: linear-gradient(#000 72%, transparent);
+          mask-image: linear-gradient(#000 72%, transparent);
+}
+.surface__photo img { width: 100%; height: 100%; object-fit: cover; object-position: var(--focus, 50% 50%); mix-blend-mode: luminosity; opacity: 0.36; }
+.surface--photo .surface__water-inner::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgb(8 36 54 / 0.86), rgb(8 36 54 / 0.5) 20%, transparent 42%);
+}
+.surface--photo .reflection { opacity: 0.16; }
+@media (max-width: 767px) {
+  .surface--inner { --stage-h: max(92svh, 32rem); }
+  .surface--photo .surface__water-inner::before { background: linear-gradient(to top, rgb(8 36 54 / 0.9), rgb(8 36 54 / 0.6) 30%, transparent 50%); }
+}
+
+/* ---------------------------------------------------------------------
+   Slot: week. One portrait under the heading (desktop), after the
+   timetable (tablet and phone), so the times stay first.
+   --------------------------------------------------------------------- */
+.week__photo { --ar: 4/5; --ar-min: 0.8; --ar-max: 0.8; grid-column: 1 / span 3; margin-top: calc(var(--u) * 6); align-self: start; }
+.week--photo .week__head { grid-row: 1; }
+.week--photo .week__photo { grid-row: 2; }
+/* The timetable's day columns run down beside the photo, like a tide gauge */
+.week--photo .week__grid { grid-row: 1 / span 2; align-self: stretch; }
+.week--photo .week__foot { grid-row: 3; }
+@media (max-width: 1100px) {
+  .week__photo { grid-column: 1 / span 5; }
+  .week--photo .week__head, .week--photo .week__photo, .week--photo .week__grid, .week--photo .week__foot { grid-row: auto; }
+  .week--photo .week__photo { order: 3; }
+  .week--photo .week__foot { order: 2; }
+}
+@media (max-width: 767px) { .week__photo { grid-column: 2 / -1; } }
+
+/* ---------------------------------------------------------------------
+   Slot: doors (give, harvest, join). A small photo rises with the water
+   that floods the row. Pointer devices only: on touch it never loads.
+   --------------------------------------------------------------------- */
+.door__media {
+  position: absolute; z-index: 0; top: 50%;
+  right: calc(3.5rem + 0.75rem + var(--gutter) * 1.25);
+  width: clamp(9rem, 4rem + 9vw, 15rem); aspect-ratio: 3 / 2; overflow: clip;
+  background: var(--deep); translate: 0 140%;
+  transition: translate 0.8s var(--e-out) 0.06s;
+}
+.door__media img { width: 100%; height: 100%; object-fit: cover; object-position: var(--focus, 50% 50%); }
+@media (min-width: 768px) { .door--media .door__what { grid-column: 5 / span 4; } }
+@media (hover: hover) { .door:hover .door__media { translate: 0 -50%; } }
+.door:focus-visible .door__media { translate: 0 -50%; }
+@media (hover: none), (pointer: coarse), (max-width: 960px) { .door__media { display: none; } }
+
+/* ---------------------------------------------------------------------
+   Gallery: "the reach" (a stretch of river). Frames hang from the three
+   hang lines (columns 1, 5, 9) in verses of three: large, small set lower,
+   then a middle one. Works for 1 to 12 items; 7 to 12 wait behind a button.
+   --------------------------------------------------------------------- */
+.reach__head { margin-bottom: calc(var(--u) * 8); }
+.reach__head > div { grid-column: 1 / span 6; }
+.reach__head p { color: var(--fg-2); max-width: 36ch; margin-top: 0.9rem; }
+.wl-reach, .wl-reach[role='list'] { row-gap: calc(var(--u) * 7); align-items: start; list-style: none; padding-inline: var(--gutter); }
+.wl-reach > li { min-width: 0; }
+.wl-reach > li:nth-child(6n+1) { grid-column: 1 / span 7; }
+.wl-reach > li:nth-child(6n+1) .wl-frame, .wl-reach > li:nth-child(6n+5) .wl-frame { --ar-min: 1.25; --ar-max: 2.4; }
+.wl-reach > li:nth-child(6n+2) { grid-column: 9 / span 4; margin-top: calc(var(--u) * 14); }
+.wl-reach > li:nth-child(6n+3) { grid-column: 5 / span 6; }
+.wl-reach > li:nth-child(6n+3) .wl-frame { --ar-min: 1; }
+.wl-reach > li:nth-child(6n+4) { grid-column: 1 / span 4; margin-top: calc(var(--u) * 14); }
+.wl-reach > li:nth-child(6n+5) { grid-column: 5 / span 8; }
+.wl-reach > li:nth-child(6n) { grid-column: 5 / span 6; }
+.wl-reach > li:nth-child(6n) .wl-frame { --ar-min: 1; }
+.wl-reach > li:only-child { grid-column: 1 / span 9; }
+.wl-reach > li:only-child .wl-frame { --ar-min: 1.4; }
+.wl-reach > li[hidden] { display: none; }
+.reach__more { margin-top: calc(var(--u) * 9); }
+@media (max-width: 767px) {
+  .wl-reach { row-gap: calc(var(--u) * 7); }
+  .wl-reach > li:nth-child(n) { grid-column: 1 / -1; margin-top: 0; }
+  .wl-reach > li:nth-child(3n+2) { grid-column: 4 / -1; }
+  .wl-reach > li:nth-child(3n) { grid-column: 1 / span 10; }
+}
+
+/* ---------------------------------------------------------------------
+   Slot: visit. The building as people will find it, and a first-Mass video.
+   --------------------------------------------------------------------- */
+.visit__photo { --ar: 3/2; --ar-min: 1.5; --ar-max: 1.5; grid-column: 1 / span 7; margin-top: calc(var(--u) * 9); }
+.visit__video { grid-column: 9 / -1; margin-top: calc(var(--u) * 9); align-self: start; }
+@media (max-width: 960px) {
+  .visit__photo { grid-column: 1 / -1; }
+  .visit__video { grid-column: 1 / -1; margin-top: calc(var(--u) * 6); }
+}
+
+@media print {
+  .wl-frame__water, .surface__photo, .door__media { display: none !important; }
+}

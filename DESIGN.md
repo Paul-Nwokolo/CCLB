@@ -144,3 +144,91 @@ the water below it, then the page's job immediately (fund chooser, commitment fo
 ### Still-at-rest decision
 The home hero and inner heroes keep breathing (wave and reflection). The rest of the page is still at
 rest on purpose: a parish site should be calm to read.
+
+---
+
+## Addendum: images and video (WordPress theme v0.3.1, November 2026)
+
+Art direction for the photo and video layer of `wordpress/themes/cclb-waterline`. The contracts
+(slots, sizes, markup, CSS, data) are in that folder's `MEDIA.md`; the photos to take next are in its
+`SHOTLIST.md`; a working static page is `prototype/media.html`.
+
+### Situation
+The site was designed type-first because the parish had no usable photography. The WordPress
+media library now has a few real parish photos (the altar, the building, Mass in November 2023),
+but most show identifiable people, three show children, and several "church" images are stock.
+The repository is public. So the layer must look finished with **no** photos, with the few safe
+ones, and with up to twelve, and it must never make a stock or unconsented photo look like the parish.
+
+### The rule: every photograph meets the river
+One rule carries the concept into imagery, the same way the wave edge carries it between bands:
+
+> A photograph's foot stands in the water, and its caption is written in the water.
+
+- Each frame (`.wl-frame`) has a band of river at its foot, a little under a seventh of the photo,
+  with the travelling wave on top. The photo shows through it, dimmed, as a reflection would be.
+  The caption sits below, on solid river blue, so it is always legible and always the same place.
+- In a water band (the week, the gallery) the frame's river is the section's river: the photo
+  seems to stand in the section itself. In an air band (visit) the river becomes a small pool
+  under the photo.
+- Square corners (surfaces are square). Pills only for the two actions on a photo: "Open larger"
+  and "Play".
+
+### Where images go, and where they do not
+
+| Place | Image | Why there |
+|---|---|---|
+| **Hero** | A strip of the parish *under* the surface: the area below the waterline at rest is filled with a photo seen through the river (luminosity blend on river blue, 36%). It rides up with the water as you scroll | The signature stays the name on the waterline; the photo deepens the river instead of competing with the type. Decorative, tinted, so no face is ever the first thing anyone sees |
+| **Week** | One upright photo of the altar under the heading; the timetable's day columns run down beside it like a tide gauge. After the timetable on phones, so the times stay first | "When is Mass" is the job; the photo answers "where" |
+| **Doors** | A small photo rises with the water that floods the row on hover (laptops only) | A reward for the pointer, zero bytes on phones |
+| **Gallery ("the reach")** | Up to 12 photos and videos, each at its own shape, hung from the three hang lines in verses of three: large, small set lower, a middle one. 7 to 12 wait behind one button | A stretch of river with things standing in it, not a grid and not a carousel |
+| **Visit** | The building or gate as a newcomer will see it, and a first-Mass video, credited | The only place a stranger needs a picture to act |
+| Month, footer, Give, Join forms | **No photos** | Calm to read. Harvest keeps its three posters |
+
+### Treatment
+- **Crops.** Named slots have fixed shapes (hero strip, week 4:5, doors 3:2, visit 3:2). Gallery
+  items keep their own shape within a range set by their position (large 1.25 to 2.4, small 0.8 to
+  1.78, middle 1.0 to 1.78), trimmed around an optional focus point. Editors never crop by hand.
+- **Water tint.** Hero only: `mix-blend-mode: luminosity` on river blue, so any photo, colour or
+  mono, becomes river-coloured. Frames are **not** tinted above the waterline: the parish in daylight
+  stays in its own colours; only the foot is under water.
+- **Wave-edge mask.** The frame's water top is the same wave as the hero and band edges (`cclb_wave()`),
+  scaled down.
+- **Reflections.** Photos are **not** mirrored. The title's rippling reflection stays the one
+  reflection on the site: mirrored faces look wrong, and a second reflection would cost a second
+  decode on phones. The dimmed foot under the water is the reflection, implied.
+
+### Motion (one verb: rise and settle like water)
+- **Surfacing:** a frame enters under water; as it rises from the bottom of the screen to just above
+  the middle, the water drains to its foot. Scrubbed by scroll, transform only.
+- **Hover and focus:** the water rises a quarter of the way up the photo and "Open larger" lifts:
+  the same verb as the buttons and the door rows. Keyboard focus gets the same rise plus a halo ring.
+- **Idle:** the wave on each visible frame keeps travelling, slowly, on the one GSAP clock.
+- **Reduced motion:** frames sit at rest, nothing travels, nothing scales. No content is hidden
+  in any state.
+
+### Video
+A click-to-load facade: the parish's own thumbnail from `i.ytimg.com` in the same frame, a "Play"
+pill, and nothing from YouTube until it is pressed. Then `youtube-nocookie.com` loads in place, with
+focus moved to it and the water dropped below the controls. Non-parish videos carry a credit in the
+caption ("Video: Ascension Presents, not a parish recording").
+
+### Weight (Lagos mobile data)
+Measured on the parish's own photos, WebP quality 58: the first screen adds 92 KB on a laptop and
+43 KB on a phone. The whole home page with 6 gallery items loads about 410 KB of images. Door photos
+cost nothing on touch. Budget: ≤ 120 KB hero, ≤ 80 KB per other image, ≤ 450 KB per page with 6
+gallery items. Details and the size table are in `MEDIA.md` section 3.
+
+### Genericness test
+- First idea for the gallery was a masonry grid with a lightbox: every church site. Replaced by the
+  reach: verses of three on the hang lines, each photo standing in the river.
+- First idea for the hero was a full-bleed congregation photo behind the name: the stock-church look,
+  and the faces problem. Replaced by the photo under the surface, tinted, below the name.
+- First idea for the week was a photo beside the heading at full colour and full width. Reduced to one
+  upright frame so the timetable stays the hero of that section.
+- No carousel anywhere; the old horizontal strip is retired.
+
+### Self-score (from the prototype screenshots; not a separate critic)
+Design 8, Usability 8, Creativity 8, Content 6. Content is the gap: the prototype can only use the
+altar and the building, and the building photos are over-bright with a watermark. The shot list's
+first item (water poured at a baptism, hands only) would lift the hero more than any code change.
