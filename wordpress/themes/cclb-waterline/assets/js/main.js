@@ -234,7 +234,9 @@ function initMenu() {
       gsap.fromTo(menu, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.8, ease: ease.inOut });
       gsap.from($$('.menu__list li', menu), { yPercent: 60, autoAlpha: 0, duration: 0.9, ease: ease.out, stagger: 0.05, delay: 0.25 });
     }
-    ($('.menu__list a', menu) || close).focus();
+    // The links start hidden (autoAlpha) and cannot take focus until their tween begins at 0.25 s.
+    const focusFirst = () => { if (open) ($('.menu__list a', menu) || close).focus(); };
+    if (reduced) focusFirst(); else { close.focus(); gsap.delayedCall(0.3, focusFirst); }
   };
   const hide = (restore = true) => {
     if (!open) return;
@@ -249,8 +251,8 @@ function initMenu() {
   };
   btn.addEventListener('click', show);
   close.addEventListener('click', () => hide());
+  document.addEventListener('keydown', (e) => { if (open && e.key === 'Escape') { e.preventDefault(); hide(); } });
   menu.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') { e.preventDefault(); hide(); }
     if (e.key !== 'Tab') return;
     const first = links[0];
     const lastEl = links[links.length - 1];

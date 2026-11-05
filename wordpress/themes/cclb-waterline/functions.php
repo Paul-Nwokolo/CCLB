@@ -4,7 +4,7 @@
  */
 defined( 'ABSPATH' ) || exit;
 
-define( 'CCLB_VERSION', '0.3.0' );
+define( 'CCLB_VERSION', '0.3.1' );
 
 require_once get_template_directory() . '/inc/icons.php';
 require_once get_template_directory() . '/inc/parish.php';
